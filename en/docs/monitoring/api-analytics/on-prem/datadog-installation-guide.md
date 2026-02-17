@@ -13,7 +13,7 @@ In the Datadog end a pipeline is created to pre-process the data. This pipeline 
 
 #### Step 1.1 - Configuring the deployment.toml file.
 
-Specify the `type` as `log` to enable Datadog analytics as shown below.
+The Choreo based analytics will be enabled by default. Specify the `type` as `log` to enable Datadog analytics as shown below.
 Edit `apim.analytics` configurations in the `deployment.toml` file located inside the `wso2am-4.x.x/repository/conf` directory with the following configuration.
 
 ```toml
@@ -135,8 +135,8 @@ For the following attributes, create facets by following this [documentation.](h
 | `applicationOwner` | Username of the user who owns the application |
 | `errorType` | Type of error that occurred (only present in fault events) |
 | `eventType` | Type of analytics event (response, fault, throttle, etc.) |
-| `destination` | Backend service endpoint URL |
-| `platform` | Platform information from user agent (Android, iOS, Windows, etc.) |
+| `Destination` | Backend service endpoint URL |
+| `Platform` | Platform information from user agent (Android, iOS, Windows, etc.) |
 | `responseCacheHit` | Boolean indicating whether the response was served from cache |
 | `userAgent` | User agent string from the API request |
 | `userName` | Username of the authenticated user making the API call |

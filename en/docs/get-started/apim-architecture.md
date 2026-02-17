@@ -12,7 +12,7 @@ The API Control Plane is where API creation and API management takes place. It c
 
 #### API Publisher
 
-[![API Publisher]({{base_path}}/assets/img/get_started/architecture/publisher-overview.png)]({{base_path}}/assets/img/get_started/architecture/publisher-overview.png)
+[![API Publisher]({{base_path}}/assets/img/learn/overviewpage-rest-api.jpg)]({{base_path}}/assets/img/learn/overviewpage-rest-api.jpg)
 
 WSO2 API Control Plane's API Publisher is a state-of-the-art GUI based tool for API development and management. The GUI is designed for API creators to develop, document, secure, test, and version APIs with ease. It’s also able to cater to more API management-related tasks such as publishing APIs, monetizing APIs, and applying rate limiting policies.
 
@@ -44,9 +44,9 @@ In addition to using the built-in Key Manager as the IDP, WSO2 API Control Plane
 
 #### API Analytics
 
-- For information on the architecture, see [API Analytics Architecture]({{base_path}}/monitoring/api-analytics/analytics-overview/#architecture/)
+- For information on the architecture, see [API Analytics Architecture]({{base_path}}/monitoring/api-analytics/choreo-analytics/api-analytics-architecture/)
 
-- For information on working with Analytics, see the [API Analytics Getting Started Guide]({{base_path}}/monitoring/moesif-analytics/moesif-integration-guide/).
+- For information on working with Analytics, see the [API Analytics Getting Started Guide]({{base_path}}/monitoring/api-analytics/choreo-analytics/getting-started-guide/).
 
 ## Data Plane
 

@@ -6,19 +6,20 @@ In this step-by-step guide, you’ll learn how to create, publish, and invoke an
 
 ### Before you begin...
 
-Choose a deployment option to start WSO2 API Manager All-in-one package. The All-in-one package contains all core components in a single JVM for simplified deployment.
+Choose a deployment option to start the WSO2 API Manager All-In-One package. The All-In-One package contains all core components in a single JVM for simplified deployment.
+.
 
 === "Run on VM"
 
-    Here's how you can download and run WSO2 API Manager All-in-one package locally on a VM:
+    Here's how you can download and run WSO2 API Manager All-In-One package locally on a VM:
 
-    1. Install [Java SE Development Kit (JDK)](https://adoptium.net/temurin/releases/?arch=any&version=21) version **21** and set the `JAVA_HOME` environment variable.
+    1. Install [Eclipse Temurin JDK](https://adoptium.net/temurin/releases/?arch=any&version=21) version **21** and set the `JAVA_HOME` environment variable.
     
         !!! tip
             For more information on setting the `JAVA_HOME` environment variable for different operating systems, see [Setup and Install]({{base_path}}/install-and-setup/install/installing-the-product/installing-api-m-runtime/#setting-up-java_home)
     
     2. Download WSO2 API-Manager All-in-one package.
-    - [Open Source Distribution](https://github.com/wso2/product-apim/releases/tag/v4.6.0)
+    - [Open Source Distribution](https://github.com/wso2/product-apim/releases/tag/v4.4.0)
     - [WSO2 Official Distribution](https://wso2.com/api-manager/#)
 
     3. Extract the downloaded zip file.
@@ -27,7 +28,7 @@ Choose a deployment option to start WSO2 API Manager All-in-one package. The All
     
     5. To start WSO2 API Manager, execute the relevant command:
 
-        === "On MacOS/Linux"
+        === "On macOS/Linux"
             ```bash
             sh api-manager.sh
             ```
@@ -39,7 +40,7 @@ Choose a deployment option to start WSO2 API Manager All-in-one package. The All
 
 === "Run on Kubernetes"
 
-    To use Kubernetes (K8s) and Helm resources for container-based deployments of WSO2 API Manager (API-M), follow the steps in [Deploying API-M on Kubernetes using Helm Resources.]({{base_path}}/install-and-setup/setup/kubernetes-deployment/kubernetes/am-pattern-0-all-in-one/#step-1-set-up-basic-configurations)
+    To use Kubernetes (K8s) and Helm resources for container-based deployments of WSO2 API Manager (API-M), follow the steps in [Deploying API-M on Kubernetes using Helm Resources.]({{base_path}}/install-and-setup/install/deploying-api-manager-with-kubernetes-or-openshift-resources/)
 
 ### What you'll build
 
@@ -76,7 +77,7 @@ Follow the instructions below to create, deploy and publish an API via the Publi
     | `Charset`               | UTF-8                 |
     | `HTTP Response Body`    | `{"hello": "world"}`  |
 
-    Finally click **Generate My HTTP Response** to save and generate the mock service url.
+    Finally, click **Generate My HTTP Response** to save and generate the mock service URL.
 
     
 4. Select **REST API** from the home screen and then click **Start From Scratch**.
@@ -93,14 +94,6 @@ Follow the instructions below to create, deploy and publish an API via the Publi
      </th>
      <td>
      HelloWorld
-     </td>
-     </tr>
-     <tr>
-     <th>
-     Display Name
-     </th>
-     <td>
-     Hello World
      </td>
      </tr>
      <tr> 
@@ -127,7 +120,7 @@ Follow the instructions below to create, deploy and publish an API via the Publi
 
     [![Create an API]({{base_path}}/assets/img/get_started/api-create.png){: style="width:100%"}]({{base_path}}/assets/img/get_started/api-create.png)
 
-    This will publish your first API on the Developer Portal as well as deploy it on the gateway. You now have an OAuth 2.0 secured REST API that is ready to be consumed.
+    This publishes your first API to the Developer Portal and deploys it on the gateway. You now have an OAuth 2.0 secured REST API that is ready to be consumed.
 
 <a name="subscribe"></a>
 
@@ -149,7 +142,7 @@ Follow the instructions below to subscribe to the API via the Developer Portal o
 
      [![API try out]({{base_path}}/assets/img/get_started/try-out.png)]({{base_path}}/assets/img/get_started/try-out.png)
 
-     And with that, we have subscribed to the API using the `DefaultApplication`.
+   You have now subscribed to the API using the "DefaultApplication".
 
 <a name="invoke"></a>
 
@@ -177,8 +170,8 @@ Follow the instructions below to invoke the created API.
 
      [![GET resource]({{base_path}}/assets/img/get_started/try-api.png)]({{base_path}}/assets/img/get_started/try-api.png)
 
-     You should see the `{"hello" : "world"}` response from the API. 
+     You should see the `{"hello": "world"}` response from the API. 
 
      [![Successful response]({{base_path}}/assets/img/get_started/try-it-success.png)]({{base_path}}/assets/img/get_started/try-it-success.png)
 
-__Congratulations!__ With that, you've created, deployed, and published your first API. Next, you subscribed to it and put it to the test. Your journey with WSO2 API Manager has officially begun!
+Congratulations! You have created, deployed, published, and tested your first API. Your journey with WSO2 API Manager begins here!

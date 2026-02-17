@@ -1,9 +1,8 @@
 [apim.analytics]
-enable = true
-type = "moesif"
-
-[apim.analytics.properties]
-moesifKey = "estY2FtcGxlLW1vZXNpZi1rZXk="
-moesif_base_url = "https://api.moesif.net"
-send_headers = false
-build_response_message = false
+enable = false
+store_api_url = "https://localhost:7444"
+username = "$ref{super_admin.username}"
+password = "$ref{super_admin.password}"
+event_publisher_type = "custom"
+event_publisher_impl = "org.wso2.carbon.apimgt.usage.publisher.APIMgtUsageDataBridgeDataPublisher"
+publish_response_size = true

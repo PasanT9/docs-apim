@@ -5,7 +5,7 @@ This deployment consists of a highly available API-M cluster with multiple nodes
 <a href="{{base_path}}/assets/img/setup-and-install/active-active-apim-deployment.png"><img src="{{base_path}}/assets/img/setup-and-install/active-active-apim-deployment.png" alt="active-active api-m deployment" width="60%"></a>
 
 !!! info
-    For advanced details on this deployment pattern, please refer to the official [documentation](kubernetes-overview.md).
+    For advanced details on this deployment pattern, please refer to the official [documentation](kubernetes-deployment-overview.md).
 
 ## Contents
 
@@ -71,16 +71,16 @@ Before you begin, ensure you have the following prerequisites in place:
   ```
 - If there are any customizations to the JARs in the product, these can also be included in the Docker image itself rather than mounting them from the deployment level (assuming they are common to all environments).
 - Below is a sample Dockerfile to build a custom WSO2 APIM image. Depending on your requirements, you may refer to the following and make the necessary additions. The script will:
-  - Use WSO2 APIM 4.6.0 as the base image
+  - Use WSO2 APIM 4.5.0 as the base image
   - Copy third-party libraries to the `<APIM_HOME>/lib` directory
 
   - Dockerfile for All-in-One:
     ```dockerfile
-    FROM docker.wso2.com/wso2am:4.6.0.0
+    FROM docker.wso2.com/wso2am:4.5.0.0
 
     ARG USER_HOME=/home/${USER}
     ARG WSO2_SERVER_NAME=wso2am
-    ARG WSO2_SERVER_VERSION=4.6.0
+    ARG WSO2_SERVER_VERSION=4.5.0
     ARG WSO2_SERVER=${WSO2_SERVER_NAME}-${WSO2_SERVER_VERSION}
     ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}
 
@@ -128,10 +128,10 @@ Deploy API Manager with minimal configuration using the following commands:
 
 ```bash
 # Deploy first instance
-helm install apim-1 wso2/wso2am-all-in-one --version 4.6.0-1 -f https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-1-all-in-one-HA/default_values_1.yaml
+helm install apim-1 wso2/wso2am-all-in-one --version 4.5.0-3 -f https://raw.githubusercontent.com/wso2/helm-apim/main/docs/am-pattern-1-all-in-one-HA/default_values_1.yaml
 
 # Deploy second instance (for high availability)
-helm install apim-2 wso2/wso2am-all-in-one --version 4.6.0-1 -f https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-1-all-in-one-HA/default_values_2.yaml
+helm install apim-2 wso2/wso2am-all-in-one --version 4.5.0-3 -f https://raw.githubusercontent.com/wso2/helm-apim/main/docs/am-pattern-1-all-in-one-HA/default_values_2.yaml
 ```
 
 !!! important
@@ -145,7 +145,7 @@ Once the service is up and running, make sure you have the NGINX Ingress Control
 
 ### 1. General Configuration of Helm Charts
 
-The Helm charts for the API Manager deployment are available in the [WSO2 Helm Chart Repository](https://github.com/wso2/helm-apim/tree/4.6.x). You can either use the charts from the repository or clone the repository and use the charts from the local copy.
+The Helm charts for the API Manager deployment are available in the [WSO2 Helm Chart Repository](https://github.com/wso2/helm-apim/tree/4.5.x). You can either use the charts from the repository or clone the repository and use the charts from the local copy.
 - The Helm naming convention for APIM follows a simple pattern. The following format is used for naming the resources:
 ```<RELEASE_NAME>-<CHART_NAME>-<RESOURCE_NAME>```
 
@@ -339,7 +339,7 @@ Now deploy the Helm chart using the following command after creating a namespace
   
   ```bash
   kubectl create namespace <namespace>
-  helm install <release-name> <helm-chart-path> --version 4.6.0-1 --namespace <namespace> --dependency-update -f values.yaml --create-namespace
+  helm install <release-name> <helm-chart-path> --version 4.5.0-3 --namespace <namespace> --dependency-update -f values.yaml --create-namespace
   ```
 
 #### 2.6 Enable High Availability

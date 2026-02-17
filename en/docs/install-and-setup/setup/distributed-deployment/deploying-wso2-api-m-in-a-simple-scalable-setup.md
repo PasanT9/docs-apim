@@ -59,7 +59,7 @@ For more information, see [Production Deployment Guidelines](../../../../install
 Create an SSL certificate for each of the WSO2 API-M nodes and import them to the keystore and the truststore. This ensures that hostname mismatch issues in the certificates will not occur.
 
 !!! Note
-The same primary keystore should be used for all API Manager instances to decrypt the registry resources. For more information, see [Configuring the Primary Keystore](../../../../install-and-setup/setup/security/configuring-keystores/configuring-keystores-in-wso2-api-manager/#configuring-the-primary-keystore).
+    The same primary keystore should be used for all API Manager instances to decrypt the registry resources. For more information, see [Configuring the Primary Keystore](../../../../install-and-setup/setup/security/configuring-keystores/configuring-keystores-in-wso2-api-manager/#configuring-the-primary-keystore).
 
 For more information, see [Creating SSL Certificates](../../../../install-and-setup/setup/security/configuring-keystores/keystore-basics/creating-new-keystores/).
 
@@ -67,7 +67,7 @@ For more information, see [Creating SSL Certificates](../../../../install-and-se
 
 API Manager Analytics is delivered via the API Manager Analytics cloud solution. You need to configure the WSO2 Universal Gateway distribution to publish analytics data to the cloud.
 
-See the instructions on [configuring the Gateway](../../../../monitoring/api-analytics/moesif-analytics/moesif-integration-guide/) with the cloud-based analytics solution.
+See the instructions on [configuring the Gateway](../../../../monitoring/api-analytics/choreo-analytics/getting-started-guide/) with the cloud-based analytics solution.
 
 ### Step 6 - Configure and start the component nodes
 

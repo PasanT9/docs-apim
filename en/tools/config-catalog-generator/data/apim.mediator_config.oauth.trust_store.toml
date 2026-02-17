@@ -1,4 +1,4 @@
 [apim.mediator_config.oauth.trust_store]
-location = "${carbon.home}/repository/resources/security/client-truststore.jks"
+location = "/path/to/truststore.jks"
 type = "JKS"
-password = "wso2carbon"
+password = "changeit"
