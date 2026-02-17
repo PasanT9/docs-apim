@@ -1,7 +1,7 @@
 
 # Integrate with HashiCorp Vault
 
-Using [HashiCorp Vault extension](https://github.com/wso2-extensions/carbon-securevault-hashicorp/tree/master), you can set up HashiCorp Vault to store passwords that are mapped to aliases instead of the actual passwords. When setting up Hashicorp Vault with APIM you can use either of the following authentication methods, based on your requirement.
+Using [HashiCorp Vault extension](https://github.com/wso2-extensions/carbon-securevault-hashicorp/tree/master), you can set up HashiCorp Vault to store passwords that are mapped to aliases instead of the actual passwords. When setting up HashiCorp Vault with APIM you can use either of the following authentication methods, based on your requirement.
    
 1. Using Root Token authentication
 2. Using App-Role authentication
@@ -124,7 +124,7 @@ This method uses a static root token to authenticate with HashiCorp Vault, provi
     ><pre>[Enter KeyStore and Private Key Password :] wso2carbon</pre>
 
     !!! note "YAJSW wrapper behavior on Windows"
-        When starting WSO2 API Manager via the YAJSW wrapper on Windows (for example, through `runConsole.bat` or `api-manager.bat start`), no interactive console is available for password input. Therefore, the keystore password prompt (`[Enter KeyStore and Private Key Password:]`) will not appear. In such cases, you must provide the keystore password through a password file (`password-tmp.txt` or `password-persist.txt`) placed under the `<APIM_HOME>` directory.
+        When starting WSO2 API Manager via the YAJSW wrapper on Windows (for example, through `runConsole.bat` or `api-manager.bat start`), no interactive console is available for password input. Therefore, the keystore password prompt (`[Enter KeyStore and Private Key Password :]`) will not appear. In such cases, you must provide the keystore password through a password file (`password-tmp.txt` or `password-persist.txt`) placed under the `<APIM_HOME>` directory, following the same method described in [Start server as a background job]({{base_path}}/install-and-setup/setup/security/logins-and-passwords/working-with-encrypted-passwords/#start-server-as-a-background-job).
 
 
 ## Setting up using App-Role authentication
@@ -284,6 +284,7 @@ This method uses dynamic authentication based on role IDs and secret IDs, allowi
     ><pre>[Enter KeyStore and Private Key Password :] wso2carbon  </pre>
 
     !!! note "YAJSW wrapper behavior on Windows"
-        When starting WSO2 API Manager via the YAJSW wrapper on Windows (for example, through `runConsole.bat` or `api-manager.bat start`), no interactive console is available for password input. Therefore, the keystore password prompt (`[Enter KeyStore and Private Key Password:]`) will not appear. In such cases, you must provide the keystore password through a password file (`password-tmp.txt` or `password-persist.txt`) placed under the `<APIM_HOME>` directory.
-
+        When starting WSO2 API Manager via the YAJSW wrapper on Windows (for example, through `runConsole.bat` or `api-manager.bat start`), no interactive console is available for password input. Therefore, the keystore password prompt (`[Enter KeyStore and Private Key Password :]`) will not appear. In such cases, you must provide the keystore password through a password file (`password-tmp.txt` or `password-persist.txt`) placed under the `<APIM_HOME>` directory, following the same method described in [Start server as a background job]({{base_path}}/install-and-setup/setup/security/logins-and-passwords/working-with-encrypted-passwords/#start-server-as-a-background-job).
+    
+    
 

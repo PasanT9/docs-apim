@@ -1777,7 +1777,7 @@
 			"name": "Settings",
 			"item": [
 				{
-					"name": "Retrieve Admin Settings",
+					"name": "Retreive Admin Settings",
 					"request": {
 						"method": "GET",
 						"header": [],

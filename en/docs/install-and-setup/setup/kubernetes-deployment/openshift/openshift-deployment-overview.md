@@ -9,7 +9,7 @@ This guide provides comprehensive instructions for deploying WSO2 API Manager on
     - [Configuring security context settings in `values.yaml`](#step-4---configure-openshift-specific-settings-in-valuesyaml)
     - [Applying proper permissions for container execution](#step-1---preparing-the-docker-images)
 
-For an all-in-one deployment, following this guide is sufficient. If you need a distributed deployment, please refer to the [Deployment Patterns guide](../kubernetes/kubernetes-deployment-overview.md) and apply the additional configurations mentioned in this document on top of the provided `default_values.yaml` files.
+For an all-in-one deployment, following this guide is sufficient. If you need a distributed deployment, please refer to the [Deployment Patterns guide](../kubernetes/kubernetes-overview.md) and apply the additional configurations mentioned in this document on top of the provided `default_values.yaml` files.
 
 ## Contents
 
@@ -51,13 +51,13 @@ The official WSO2 Docker images run as a non-root user with a fixed UID. While t
 
 Also 
 
-1. Starting from v4.5.0, each component has a separate Docker image (All-in-one, Control-plane, Gateway, Traffic-manager).
+1. Starting from v4.6.0, each component has a separate Docker image (All-in-one, Control-plane, Gateway, Traffic-manager).
 2. These Docker images do not contain any database connectors; therefore, we need to build custom Docker images based on each Docker image in order to make the deployment work with a separate DB.
 3. Download a connector which is compatible with the DB version and copy the connector while building the image
 
 !!! example "Sample Dockerfile for All-in-One Image"
     ```dockerfile
-    FROM wso2/wso2am:4.5.0
+    FROM wso2/wso2am:4.6.0
 
     # Change directory permissions for OpenShift compatibility
     USER root
@@ -260,7 +260,7 @@ The All-in-One deployment is the simplest pattern to deploy WSO2 API Manager on 
    helm install apim wso2/wso2am-all-in-one \
      --namespace wso2 \
      --create-namespace \
-     --version 4.5.0-3 \
+     --version 4.6.0-1 \
      -f openshift-values.yaml
    ```
 
@@ -270,10 +270,10 @@ The All-in-One deployment is the simplest pattern to deploy WSO2 API Manager on 
    helm install apim wso2/wso2am-all-in-one \
      --namespace wso2 \
      --create-namespace \
-     --version 4.5.0-3 \
+     --version 4.6.0-1 \
      --set wso2.subscription.username=<USERNAME> \
      --set wso2.subscription.password=<PASSWORD> \
-     -f https://raw.githubusercontent.com/wso2/helm-apim/main/docs/am-pattern-0-all-in-one/default_openshift_values.yaml
+     -f https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-0-all-in-one/default_openshift_values.yaml
    ```
 
 ### Step 3 - Verify Deployment
@@ -310,7 +310,7 @@ For distributed deployments of WSO2 API Manager on OpenShift, you need to apply 
 
 ### Step 1 - Select an Appropriate Pattern
 
-Review the [WSO2 API-M Deployment Patterns](../kubernetes/kubernetes-deployment-overview.md) and choose the pattern that suits your requirements:
+Review the [WSO2 API-M Deployment Patterns](../kubernetes/kubernetes-overview.md) and choose the pattern that suits your requirements:
 
 - [Pattern 1: HA All-in-One Deployment](../kubernetes/am-pattern-1-all-in-one-ha.md)
 - [Pattern 2: All-in-One with Gateway](../kubernetes/am-pattern-2-all-in-one-gw.md) 
@@ -356,7 +356,7 @@ Deploy components in the correct order, typically:
    helm install apim wso2/wso2am-acp \
      --namespace wso2 \
      --create-namespace \
-     --version 4.5.0-3 \
+     --version 4.6.0-1 \
      -f control-plane-openshift-values.yaml
    ```
 
@@ -365,7 +365,7 @@ Deploy components in the correct order, typically:
    helm install tm wso2/wso2am-tm \
      --namespace wso2 \
      --create-namespace \
-     --version 4.5.0-3 \
+     --version 4.6.0-1 \
      -f tm-openshift-values.yaml
    ```
 
@@ -373,7 +373,7 @@ Deploy components in the correct order, typically:
    ```bash
    helm install km wso2/wso2am-km \
      --namespace wso2 \
-     --version 4.5.0-3 \
+     --version 4.6.0-1 \
      -f km-openshift-values.yaml
    ```
 
@@ -381,7 +381,7 @@ Deploy components in the correct order, typically:
    ```bash
    helm install gw wso2/wso2am-universal-gw \
      --namespace wso2 \
-     --version 4.5.0-3 \
+     --version 4.6.0-1 \
      -f gw-openshift-values.yaml
    ```
 

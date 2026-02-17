@@ -808,7 +808,7 @@ Set configuration parameters. You can use one of the following flags.
                 <code>--http-request-timeout</code>
             </th>
             <td>
-                Specify the request timeout in milliseconds.
+                Specify the request timout in milliseconds.
             </td>
         </tr>
         <tr>

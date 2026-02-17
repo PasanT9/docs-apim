@@ -29,7 +29,7 @@ For more information, see [Creating SSL Certificates](../../../../install-and-se
 
 API Manager Analytics is delivered via the API Manager Analytics cloud solution. You need to configure the WSO2 Universal Gateway distribution to publish analytics data to the cloud.
 
-See the instructions on [configuring the Gateway](../../../../monitoring/api-analytics/choreo-analytics/getting-started-guide/) with the cloud-based analytics solution.
+See the instructions on [configuring the Gateway](../../../../monitoring/api-analytics/moesif-analytics/moesif-integration-guide/) with the cloud-based analytics solution.
 
 ### Step 6 - Configure and start the component nodes
 
@@ -146,7 +146,7 @@ Follow the instructions given below to configure the Gateway node so that it can
     !!! Info
         To further optimize the gateway notification feature, you can use additional `gateway_notification` configurations. For more information, see [API-M Revision Deployment Monitoring](../../../../reference/config-catalog/#api-m-gateway-notification-configurations).
 
-5. Enable JSON Web Token (JWT) if required. For instructions, see [Generating JSON Web Token](../../../../manage-apis/deploy-and-publish/deploy-on-gateway/api-gateway/passing-enduser-attributes-to-the-backend-via-api-gateway).
+5. Enable JSON Web Token (JWT) if required. For instructions, see [Generating JSON Web Token](../../../../deploy-and-publish/deploy-on-gateway/api-gateway/passing-enduser-attributes-to-the-backend-via-api-gateway).
 
 6. Add the public certificate of the private key (that is used for signing the tokens) to the truststore under the "gateway_certificate_alias" alias. For instructions, see [Create and import SSL certificates](../../../../install-and-setup/setup/security/configuring-keystores/keystore-basics/creating-new-keystores).
 

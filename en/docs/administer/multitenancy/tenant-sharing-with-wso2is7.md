@@ -11,6 +11,7 @@ Tenant sharing can be configured in either direction: from API Manager to Identi
 By default, authentication between WSO2 API Manager and WSO2 Identity Server 7.x is performed via Mutual SSL. Therefore, it is necessary to configure a certificate that is trusted by both components during deployment.
 
 **1\.  Exchange and import certificates**
+
    *   Import the public certificate of WSO2 IS 7.x into the truststore of WSO2 API Manager.
 
    *   Import the public certificate of WSO2 API Manager into the truststore of WSO2 IS 7.x.
@@ -18,7 +19,6 @@ By default, authentication between WSO2 API Manager and WSO2 Identity Server 7.x
    *   For detailed instructions, refer to the [Importing certificates to the truststore]({{base_path}}/install-and-setup/setup/security/configuring-keystores/keystore-basics/creating-new-keystores/#step-3-importing-certificates-to-the-truststore) guide.
 
 **2\. Enable client certificate-based authentication** 
-
 
 Add the following configuration to the `<Product-Home>/repository/conf/deployment.toml` of WSO2 IS 7.x to globally enable client certificate-based authentication.
 
@@ -50,11 +50,10 @@ allowed_username = ["*"]
 
     You could use `openssl x509 -noout -in <cert_file> -issuer -fingerprint -sha256` to get certificate information
 
-
 ## Tenant Synchronization from WSO2 IS 7.x to WSO2 API Manager
 
 !!! note 
-    Starting from WSO2 Identity Server 7.2.0, it is possible to create tenant domains without a mandatory dot extension (e.g., abc instead of abc.com). If you intend to support tenant domains in this format, please add the following configuration to the `<Product-Home>/repository/conf/deployment.toml` file of API Manager to avoid errors during tenant synchronization :  
+    Starting from WSO2 Identity Server 7.2.0, it is possible to create tenant domains without a mandatory dot extension (e.g., abc instead of abc.com). If you intend to support tenant domains in this format, please add the following configuration to the `<Product-Home>/repository/conf/deployment.toml` file of API Manager to avoid errors during tenant synchronization: : 
     ```toml
     [multi_tenancy]
     stratos.public_cloud_setup = false

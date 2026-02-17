@@ -518,22 +518,22 @@ in your WSO2 product.
         configuring user stores in WSO2 products, see [Configuring User
         Stores]({{base_path}}/administer/product-administration/managing-users-and-roles/managing-user-stores/configuring-secondary-user-stores/).
 
+    **Adding custom user store as a secondary user store**
 
-**Adding custom user store as a secondary user store**
+    If you need to add the custom user store as a **secondary** user store, you must use one of the following configurations in the `<API-M_HOME>/repository/conf/deployment.toml` file instead of the configuration shown above:
 
-If you need to add the custom user store as a **secondary** user store, you must use one of the following configurations in the `<API-M_HOME>/repository/conf/deployment.toml` file instead of the configuration shown above:
+    **Option 1:** Add to the allowed user stores list
+    ``` toml
+    [user_store_mgt]
+    allowed_user_stores=["org.wso2.carbon.user.core.jdbc.UniqueIDJDBCUserStoreManager", "org.wso2.carbon.user.core.ldap.UniqueIDActiveDirectoryUserStoreManager","org.wso2.carbon.user.core.ldap.UniqueIDReadOnlyLDAPUserStoreManager","org.wso2.carbon.user.core.ldap.UniqueIDReadWriteLDAPUserStoreManager","org.wso2.custom.user.store.CustomUserStoreManager"]
+    ```
 
-**Option 1:** Add to the allowed user stores list
-``` toml
-[user_store_mgt]
-allowed_user_stores=["org.wso2.carbon.user.core.jdbc.UniqueIDJDBCUserStoreManager", "org.wso2.carbon.user.core.ldap.UniqueIDActiveDirectoryUserStoreManager","org.wso2.carbon.user.core.ldap.UniqueIDReadOnlyLDAPUserStoreManager","org.wso2.carbon.user.core.ldap.UniqueIDReadWriteLDAPUserStoreManager","org.wso2.custom.user.store.CustomUserStoreManager"]
-```
-
-**Option 2:** Add to the custom user stores list
-``` toml
-[user_store_mgt]
-custom_user_stores=["org.wso2.custom.user.store.CustomUserStoreManager"]
-```
+    **Option 2:** Add to the custom user stores list
+    ``` toml
+    [user_store_mgt]
+    custom_user_stores=["org.wso2.custom.user.store.CustomUserStoreManager"]
+    ```
+    
 
     You do not need to change anything else since you extend the
     JDBCUserStoreManager class, so the configurations will remain the

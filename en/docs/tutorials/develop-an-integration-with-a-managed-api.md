@@ -31,7 +31,7 @@ Let’s create an API in WSO2 API Manager.
    
      You can use any option to create the REST API.
 	 
-	 [![API from scratch menu]({{base_path}}/assets/img/tutorials/api-from-scratch-menu.png)]({{base_path}}/assets/img/tutorials/api-from-scratch-menu.png)
+	 [![API from scratch menu]({{base_path}}/assets/img/get_started/design-new-rest-api.png)]({{base_path}}/assets/img/get_started/design-new-rest-api.png)
 
 1. Enter the details of the API and click **Create** to create the REST API.
     
@@ -377,7 +377,7 @@ Now let’s add the developed backend service to the API.
 
 ## Step 8 - Deploy the API
 
-Deploy the `HealthcareAPI` REST API in the Gateway. For more information, see [Deploy an API]({{base_path}}/manage-apis/deploy-and-publish/deploy-on-gateway/deploy-api/deploy-an-api/#deploy-an-api).
+Depoly the `HealthcareAPI` REST API in the Gateway. For more information, see [Deploy an API]({{base_path}}/manage-apis/deploy-and-publish/deploy-on-gateway/deploy-api/deploy-an-api/#deploy-an-api).
 
 ## Step 9 - Start the backend service
 
