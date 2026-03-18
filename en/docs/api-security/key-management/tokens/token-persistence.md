@@ -6,7 +6,7 @@ In WSO2 API Manager, OAuth2 token persistence is integral to authentication and 
 
 Using JWTs instead of Opaque is the recommended approach in WSO2 API Manager since Gateway can self validate JWTs without additional hops to KeyManager unlike Opaque.
 
-For JSON Web Tokens (JWTs), when token persistence is enabled, API Manager stores references instead of the complete tokens, optimizing storage. For JWTs, token generation or validation triggers interactions with the database. 
+For JSON Web Tokens (JWTs), when token persistence is enabled, API Manager stores references instead of complete tokens, optimizing storage. In this mode, token-generation and persistence-related flows interact with the database. 
 
 The JWT token persistence behavior differs from the opaque token persistence behavior, where an existing active token is retrieved upon a token request. The JWT token issuer always provides a new JWT token because the complete JWT access token is not persisted in the database. Consequently, achieving the same token generation behavior for JWTs as for opaque tokens requires customizing the token issuer.
 
@@ -17,7 +17,7 @@ The JWT token persistence behavior differs from the opaque token persistence beh
 
 In large-scale deployments of WSO2 API Manager, when there are millions of users and concurrent user logins, number of tokens in database can exponentially grow and scaling will be extremely hard. This can also result in a noticeable decrease in Transactions Per Second (TPS) for token generation.  For example, consider a large telco provider company with 1.4 million subscribers with a 1000 per sec daily token generation rate. Scaling the deployment by increasing the number of key manager nodes, partitioning the database or periodically running the token clean up scripts might not give you the optimal TPS as needed. For such a requirements, token persistence optimization comes into play by using JWTs as both access and refresh tokens, not persisting them during generation while still supporting essential token revocation and refresh-grant functionalities.
 
-- Token persistence optimization is only applicable to JWT tokens as they can be self validated. If you are still using Opaque type applications, we recommend you to switch to JWT type applications to fully receive the benefits. Please follow the instructions given in [Upgrading Opaque applications to JWT]({{base_path}}/) if you wish to do so.
+- Token persistence optimization is only applicable to JWT tokens as they can be self validated. If you are still using Opaque type applications, we recommend you to switch to JWT type applications to fully receive the benefits. Please follow the instructions given in [Upgrading the Token Type of an Application to JWT]({{base_path}}/api-developer-portal/manage-application/advanced-topics/upgrade-token-type-of-application-to-jwt.md) if you wish to do so.
 - With token persistence optimization, it will not persist the JWT tokens during generation, hence upon every token generation request, a new JWT access and refresh token pair will be generated.
 
 #### Limitations
@@ -38,7 +38,7 @@ In large-scale deployments of WSO2 API Manager, when there are millions of users
         enable=true
     ```
 
-2. Remove the following configuraiton
+2. Remove the following configuration
     
     ``` toml
         [[oauth.extensions.token_types]]
