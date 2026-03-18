@@ -262,6 +262,8 @@ Replace `<namespace>` with your target namespace (e.g., `wso2`).
 
 ### Configure values.yaml
 
+Before deploying, set the mandatory internal encryption key under `wso2.apim.configurations.encryption.key`. If your deployment runs more than one API-M pod or instance, use the same key value across all of them. For more information, see [Configuring Encryption Key]({{base_path}}/install-and-setup/setup/security/encryption/symmetric-encryption/#generate-a-secret-key).
+
 Create a `values.yaml` file with the following configuration:
 
 ```yaml
@@ -279,6 +281,8 @@ kubernetes:
 wso2:
   apim:
     configurations:
+      encryption:
+        key: "<generated-64-char-hex-key>"
       databases:
         type: "mysql"
         jdbc:
