@@ -48,7 +48,7 @@ latest product version to receive all the security issues resolved until that pa
 <li><p>Make sure that WSO2 default certificates do not exist in any of the keystores in your production environment. For example, be sure to delete the default public certificate in the default trust store that is shipped with the product.</p></li>
 </ul>
 <p>For more information on recommendations for using keystores in WSO2 
-products, see <a href="{{base_path}}/install-and-setup/setup/security/configuring-keystores/keystore-basics/about-asymetric-cryptography/">About Asymmetric Cryptography</a>.<br />
+products, see <a href="{{base_path}}/install-and-setup/setup/security/configuring-keystores/configuring-keystores-in-wso2-api-manager/#recommendations-for-setting-up-keystores">Recommendations for setting up keystores</a>.<br />
 For information on how to create and configure your own keys and keystores, see <a href="{{base_path}}/install-and-setup/setup/security/configuring-keystores/configuring-keystores-in-wso2-api-manager/">Creating New Keystores</a>.</p></td>
 </tr>
 <tr class="odd">
@@ -341,6 +341,37 @@ Add the following configuration to the <code>deployment.toml</code> file:
 login_username_case_insensitive = false
 </code>
 </pre>
+</td>
+</tr>
+<tr class="odd" id="encryption-key">
+<td><p>Add the symmetric encryption key</p></td>
+<td>
+<p>
+You should generate a symmetric encryption key for internal encryption and add it to the <code>deployment.toml</code> file. See <a href="{{base_path}}/install-and-setup/setup/security/encryption/symmetric-encryption/#generate-a-secret-key">Configuring Encryption Key</a> for instructions.
+</p>
+</td>
+</tr>
+<tr class="even" id="wsdl-url-generation">
+<td><p>Configure WSDL URL generation secret</p></td>
+<td>
+<p>
+If you are using the WSDL URL of a SOAP API generated using the Developer Portal, 
+configure a secret to secure the generated URLs. Add the following to 
+the <code>deployment.toml</code> file:
+</p>
+<pre class="java" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence" style="brush: java; gutter: false; theme: Confluence">
+<code>
+[apim.devportal]
+url_generation_secret = "your_secret"
+</code>
+</pre>
+<p>
+A randomly generated string of at least 32 characters is recommended. You can generate a strong secret using the following command:
+</p>
+<pre><code>openssl rand -base64 32</code></pre>
+<p>
+It is highly recommended to encrypt this secret using the secure vault. See <a href="{{base_path}}/install-and-setup/setup/security/logins-and-passwords/working-with-encrypted-passwords/">Encrypting Passwords in Configuration Files</a> for instructions.
+</p>
 </td>
 </tr>
 </tbody>
