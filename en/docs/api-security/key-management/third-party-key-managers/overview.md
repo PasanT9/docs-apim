@@ -16,6 +16,7 @@ Organizations can configure multiple Key Managers within a single tenant, allowi
 - **[Keycloak]({{base_path}}/api-security/key-management/third-party-key-managers/configure-keycloak-connector/)**: Open-source identity and access management solution
 
 ### Cloud Identity Services
+- **[Asgardeo]({{base_path}}/api-security/key-management/third-party-key-managers/configure-asgardeo-connector/)**: WSO2's cloud-based identity and access management platform
 - **[Okta]({{base_path}}/api-security/key-management/third-party-key-managers/configure-okta-connector/)**: Cloud-based identity service integration
 - **[Auth0]({{base_path}}/api-security/key-management/third-party-key-managers/configure-auth0-connector/)**: Developer-focused identity platform
 - **[Azure AD]({{base_path}}/api-security/key-management/third-party-key-managers/configure-azure-ad-key-manager/)**: Microsoft Azure Active Directory integration
