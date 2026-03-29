@@ -134,7 +134,7 @@ For more information on WSO2 API Manager, see the [overview]({{base_path}}/get-s
 
 ## Key Changes
 
-Before upgrading to WSO2 API Manager 4.6.0, review the following architectural considerations that may affect your deployment setup:
+Before upgrading to WSO2 API Manager 4.7.0, review the following architectural considerations that may affect your deployment setup:
 
 - **Support for Choreo Analytics has been deprecated:**
 Choreo Analytics has been deprecated in favor of Moesif-powered WSO2 Analytics, which offers enhanced insights and observability.
