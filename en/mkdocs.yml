@@ -547,7 +547,9 @@ nav:
     - API Analytics & Monetization:
         - API Analytics:
             - Overview: monitoring/api-analytics/analytics-overview.md
-            - Moesif Analytics: monitoring/api-analytics/moesif-analytics/moesif-integration-guide.md
+            - Moesif Analytics:
+                - Integration Guide: monitoring/api-analytics/moesif-analytics/moesif-integration-guide.md
+                - Analytics Dashboards: monitoring/api-analytics/moesif-analytics/moesif-analytics-dashboards.md
             - Other Analytics Solutions:
                 - ELK Based Analytics Installation Guide: monitoring/api-analytics/on-prem/elk-installation-guide.md
                 - Datadog Analytics Installation Guide : monitoring/api-analytics/on-prem/datadog-installation-guide.md
