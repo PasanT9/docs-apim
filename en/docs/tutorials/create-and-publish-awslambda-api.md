@@ -218,5 +218,4 @@ You have successfully published the AWS Lambda API. Try invoking the Lambda API 
     </tbody>
     </table>
 
-    !!! Note 
-        These configurations serve as the global settings for all AWS Lambda endpoints in the Gateway. However, please note that each API resource initializes its own independent **AWS Lambda client**. Therefore, the values defined here (such as <code>max_connections</code>) are applied per API resource, not as a server-wide aggregate limit.
+    These configurations serve as the global settings for all AWS Lambda endpoints in the Gateway. However, please note that each API resource initializes its own independent **AWS Lambda client**. Therefore, the values defined here (such as <code>max_connections</code>) are applied per API resource, not as a server-wide aggregate limit.
