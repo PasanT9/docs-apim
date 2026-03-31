@@ -1,44 +1,56 @@
 # Getting Started with Universal Gateway
 
-This guide walks you through setting up a Universal Gateway in your environment. Follow these steps to get the gateway running and connected to the control plane.
+This guide walks you through setting up a Universal Gateway in your environment. Follow these steps to get the gateway running and connected to the Control Plane.
 
 ## Overview
 
-The Universal Gateway allows you to run the API gateway in your own infrastructure while maintaining centralized management through the control plane.
+The Universal Gateway allows you to run the API gateway in your own infrastructure while maintaining centralized management through the Control Plane.
 
 ## Prerequisites
 
 Before you begin, ensure that you have the following:
 
-- `curl`
-- `unzip`
-- Docker installed and running
-- Docker Compose installed
+- **cURL**
+- **unzip**
+- **Docker** installed and running
+- **Docker Compose** installed
 
 ## Create a Universal Gateway in the Admin Portal
 
-1. Sign in to the admin portal.
-2. Go to the Gateway section from the left navigation panel.
-3. On WSO2 Gateways section, click on **Add WSO2 Gateways** button
+1. Sign in to the **Admin Portal**.
+2. Go to the **Gateways** section from the left navigation panel.
+3. In the **WSO2 Gateways** section, click **Add WSO2 Gateways**.
+
+    ![Gateway List Empty](../../assets/img/api-gateway/universal-gateway/gateway-list-empty.png)
+
 4. Select the **Universal Gateway** from **Gateway Environment Type**.
 5. Provide the following details:
 
     - **Display Name**: A unique name for your gateway.
     - **Description**: An optional description.
     - **URL**: The URL where the gateway will be accessible. For example, `https://localhost:8443`.
-    - **Visibility**: The devportal visibility restriction base on th roal.
+    - **Visibility**: Dev Portal visibility based on roles.
+
+    ![Gateway Add](../../assets/img/api-gateway/universal-gateway/gateway-add.png)
 
 6. Click **Add**.
 
-## Set up the Gateway
+## Setup the Gateway
+
+1. Next, download, configure, and start the gateway on your machine by following the steps in the **Quick Start** section or the detailed instructions below (Steps 1-4).
+
+    !!! note
+        In Quick Start, copy the generated commands from the UI. For manual setup, use the detailed steps below.
+
+    ![Gateway View](../../assets/img/api-gateway/universal-gateway/gateway-view.png)
 
 ### Step 1: Download the Gateway
 
 Run the following command to download the gateway:
 
 ```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v1.0.0/gateway-v1.0.0.zip && \
-unzip gateway-v1.0.0.zip
+curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
+unzip gateway-v0.12.0.zip
 ```
 
 ### Step 2: Configure the Gateway
@@ -46,21 +58,21 @@ unzip gateway-v1.0.0.zip
 Run the following command to create the gateway configuration:
 
 ```bash
-cat > gateway-v1.0.0/configs/keys.env << 'ENVFILE'
+cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
 MOESIF_KEY=<your-moesif-key>
-GATEWAY_CONTROLPLANE_HOST=localhost:9443
+GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
 GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
 ENVFILE
 ```
 
-When you copy this command from the console, the placeholder values are populated automatically.
+When you copy this command from the UI, the placeholder values are populated automatically.
 
 ### Step 3: Start the Gateway
 
 Navigate to the gateway directory and start the gateway using Docker Compose:
 
 ```bash
-cd gateway-v1.0.0
+cd gateway-v0.12.0
 docker compose --env-file configs/keys.env up
 ```
 
@@ -76,21 +88,23 @@ docker compose ps
 curl http://localhost:9002/health
 ```
 
-The gateway should appear as active in the control plane console.
+The gateway should appear as active in the Control Plane.
 
 ## Add an API and invoke it
 
 !!! note
-    This feature is currently available only for REST API proxies that are created from scratch, or by importing from OpenAP.
+    This feature is currently available only for REST APIs that are created from scratch, or by importing from OpenAPI.
 
     It is not currently available for WebSocket, GraphQL, MCP, or AI APIs.
 
 ### Step 1: Create a REST API
 
-In this example, you will use the URL of an OpenAPI definition to create an API proxy.
+In this example, you will use the URL of an OpenAPI definition to create a REST API.
 
-1. Sign in to the **publisher** portal.
-2. Click on REST APIs.
+For detailed API creation steps, see [Create a REST API]({{base_path}}/api-design-manage/design/create-api/create-rest-api/create-a-rest-api/).
+
+1. Sign in to the **Publisher Portal**.
+2. Click **REST APIs**.
 3. Select **Import API Contract**.
 4. Select the **URL** option and provide the following URL:
 
@@ -98,9 +112,11 @@ In this example, you will use the URL of an OpenAPI definition to create an API 
 https://raw.githubusercontent.com/wso2/bijira-samples/refs/heads/main/reading-list-api/openapi.yaml
 ```
 
-5. Click **Next** and edit the predefined values if required.
-6. Select the gateway type as **Universal Gateway**.
-7. Click **Create**.
+5. Select the gateway type as **Universal Gateway**.
+   
+    ![Select Gateway Type](../../assets/img/api-gateway/universal-gateway/select-gateway-type.png)
+
+6. Click **Create**.
 
 ### Step 2: Deploy the REST API
 
@@ -108,13 +124,46 @@ This step is optional during the initial creation because the API is deployed to
 
 To redeploy the API:
 
-1. Navigate to the **Deploy** page of the API proxy.
+1. Navigate to the **Deployments** page of the API.
+   
+    ![API Deployments Page](../../assets/img/api-gateway/universal-gateway/api-deployments-page.png)
+
 2. Click **Deploy**.
+   
+    ![Deploy API](../../assets/img/api-gateway/universal-gateway/deploy-api.png)
 
-## Test the API Proxy
+## Test the API with cURL
 
-1. Navigate to **Test** -> **cURL** in the API proxy.
-2. Use the generated cURL command for the required resource to test the API proxy.
+You can test the API in two ways:
+
+1. Without authentication headers (for APIs that are not protected by an API key policy)
+2. With an API key header (for APIs protected by an API key policy)
+
+If you want to enforce API-key-based authentication, add the **API Key** policy to the API and deploy the updated revision.
+
+!!! info
+    - For policy configuration steps, see [Adding and Managing Policies]({{base_path}}/api-gateway/universal-gateway/adding-and-managing-policies/).
+    - When an API is deployed to Universal Gateway, gateway policies are managed through [Policy Hub](https://wso2.com/api-platform/policy-hub).
+    - For API-key-based authentication, use the [API Key Authentication policy](https://wso2.com/api-platform/policy-hub/policies/api-key-auth).
+
+Use the following cURL commands to verify both behaviors.
+
+1. Invoke the API **without** an API key.
+
+```bash
+curl "https://localhost:8443/readinglistapi/1.0/books" -X GET -k
+```
+
+This request succeeds when the API does not require an API key. If an API key policy is enabled, this request is expected to fail with an authentication error.
+
+2. Invoke the API with the API key header configured in the policy (for example, header name `X-API-Key`).
+
+```bash
+curl -k -i "https://localhost:8443/readinglistapi/1.0/books" \
+  -H "X-API-Key: <your-generated-api-key>"
+```
+
+If the API key is valid, the request succeeds and returns a successful response from the backend. Ensure the header name in your cURL command exactly matches the header name configured in the API Key policy.
 
 ## Next steps
 

@@ -1,30 +1,40 @@
 # Adding and Managing Policies
 
-This guide explains how to add and manage policies for the Self-Hosted Gateway using the unified control plane.
+This guide explains how to add and manage policies for APIs deployed to Universal Gateway.
 
 ## Overview
 
-Policies allow you to enforce security, rate limiting, transformations, and other governance requirements on your APIs. With the Self-Hosted Gateway, policies are managed centrally through the Policy Hub and synchronized automatically to the gateway.
+Policies allow you to enforce security, traffic control, transformations, and other governance requirements on your APIs.
+
+For APIs deployed to Universal Gateway, policies are currently sourced from Policy Hub and configured in the API Publisher.
+
+You can apply policies by dragging them to the policy canvas and then configuring each policy to run in the request flow or response flow, based on your API behavior requirements.
 
 ## Add policies to an API
 
-To add policies to an API deployed on the Self-Hosted Gateway:
+To add policies to an API deployed to Universal Gateway:
 
-1. Sign in to the control plane console.
-2. Select your organization and project.
-3. Navigate to the API proxy that you want to configure.
-4. Click **Develop** in the left navigation menu and then select **Policies**.
-5. Choose the policy flow for the API level or resource level.
-6. Click **+ Add Policy** and select the required policy type.
-7. Configure the policy parameters.
-8. Click **Add**.
-9. Save the API.
-10. Deploy the API changes to the gateway.
+1. Sign in to the **Publisher Portal**.
+2. Open the API that is deployed (or will be deployed) to **Universal Gateway**.
+3. Go to **Develop** -> **Policies**.
+
+    ![API Policies Page](../../assets/img/api-gateway/universal-gateway/api-policies-page.png)
+
+4. Drag and drop the required policy from the available policies list to the policy canvas.
+5. Configure the policy parameters.
+
+    In the policy configuration, choose how the policy should behave in the **Request** flow or **Response** flow.
+
+    ![Configure Policy](../../assets/img/api-gateway/universal-gateway/policy-configure.png)
+
+6. Save the API and deploy the updated revision to Universal Gateway.
+
+    ![Deploy API with Policies](../../assets/img/api-gateway/universal-gateway/policy-deploy-api.png)
 
 ## Available policy types
 
-Navigate to the Policy Hub to view the available policies.
+See [Policy Hub](https://wso2.com/api-platform/policy-hub) for available policies.
 
 ## What's next
 
-- Monitor API traffic and runtime behavior using the analytics and monitoring capabilities available in your control plane.
+- Return to [Getting Started]({{base_path}}/api-gateway/universal-gateway/getting-started/) to test API invocation with and without API-key-based authentication.
