@@ -75,7 +75,7 @@
                 {
                     "name": "apim.proxy_config",
                     "required": false,
-                    "description": "configuration used to define or enable disable proxy configurations.",
+                    "description": "configuration used to define or enable disable proxy configurations. Note that targetProxyHosts configuration only availalbe from U2 update level 19 onwards.",
                     "params": [
                         {
                             "name": "enable",
