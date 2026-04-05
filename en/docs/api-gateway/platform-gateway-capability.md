@@ -20,7 +20,7 @@ This model is ideal for organizations that require:
 - Full control over runtime environments
 - Data residency and compliance alignment
 - Isolation across network boundaries
-- Flexible deployment topologies (VM, docker, Kubernates)
+- Flexible deployment topologies (VM, Docker, Kubernetes)
 
 With WSO2 Gateways, you get the best of both worlds: **centralized API management** and **localized runtime execution**.
 
