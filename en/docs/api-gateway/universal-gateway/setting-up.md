@@ -1,181 +1,221 @@
-# Setting Up Universal Gateway
+# Setting Up
 
-This guide provides detailed instructions for deploying the Universal Gateway in production environments. Choose the setup option that matches your infrastructure.
+This guide provides detailed instructions for deploying Universal Gateway in production environments. Choose the infrastructure option that matches your environment.
 
-If you are getting started for the first time, see [Getting Started with Universal Gateway]({{base_path}}/api-gateway/universal-gateway/getting-started/).
+!!! tip "Quick Start"
+    If you are just getting started, see the [Getting Started]({{base_path}}/api-gateway/universal-gateway/getting-started/) guide for a quick setup.
 
-## Docker setup
+## Setup Instructions
 
-### Prerequisites
+=== "Virtual Machine"
 
-- `curl`
-- `unzip`
-- A Docker-compatible container runtime such as Docker Desktop, Rancher Desktop, Colima, or Docker Engine with Compose support
+    ### Prerequisites
 
-Ensure that the following commands are available:
+    - cURL installed
+    - unzip installed
+    - A Docker-compatible container runtime such as:
+        - Docker Desktop (Windows / macOS)
+        - Rancher Desktop (Windows / macOS)
+        - Colima (macOS)
+        - Docker Engine + Compose plugin (Linux)
 
-```bash
-docker --version
-docker compose version
-```
+    Ensure `docker` and `docker compose` commands are available:
 
-### Step 1: Download the Gateway
+    ```bash
+    docker --version
+    docker compose version
+    ```
 
-```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
-unzip gateway-v0.12.0.zip
-```
+    ### Step 1: Download the Gateway
 
-### Step 2: Configure the Gateway
+    Run this command in your terminal to download the gateway:
 
-Create `gateway-v0.12.0/configs/keys.env` with the required environment variables:
+    ```bash
+    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
+    unzip gateway-v0.12.0.zip
+    ```
 
-```bash
-cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
-MOESIF_KEY=<your-moesif-key>
-GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:<9443>
-GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
-ENVFILE
-```
+    ### Step 2: Configure the Gateway
 
-### Step 3: Start the Gateway
+    Run this command to create `gateway-v0.12.0/configs/keys.env` with the required environment variables:
 
-```bash
-cd gateway-v0.12.0
-docker compose --env-file configs/keys.env up
-```
+    ```bash
+    cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
+    MOESIF_KEY=<your-moesif-key>
+    GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
+    GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
+    ENVFILE
+    ```
 
-To run the gateway in detached mode:
+    ### Step 3: Start the Gateway
 
-```bash
-docker compose --env-file configs/keys.env up -d
-```
+    1. Navigate to the gateway folder:
 
-### Step 4: Verify the Gateway
+        ```bash
+        cd gateway-v0.12.0
+        ```
 
-```bash
-docker compose ps
-```
+    2. Run this command to start the gateway using the `configs/keys.env` file created in Step 2:
 
-### Stop the Gateway
+        ```bash
+        docker compose --env-file configs/keys.env up
+        ```
 
-```bash
-docker compose down
-```
+    To run in detached mode (background):
 
-## Virtual machine setup
+    ```bash
+    docker compose --env-file configs/keys.env up -d
+    ```
 
-### Prerequisites
+    ### Step 4: Verify the Gateway
 
-- `curl`
-- `unzip`
-- Docker Compose installed
+    Check that the gateway is running:
 
-### Step 1: Download the Gateway
+    ```bash
+    docker compose ps
+    ```
 
-```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
-unzip gateway-v0.12.0.zip
-```
+    ### Stopping the Gateway
 
-### Step 2: Configure the Gateway
+    To stop the gateway:
 
-Create `gateway-v0.12.0/configs/keys.env` with the required environment variables:
+    ```bash
+    docker compose down
+    ```
 
-```bash
-cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
-MOESIF_KEY=<your-moesif-key>
-GATEWAY_CONTROLPLANE_HOST=connect.bijira.dev
-GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
-ENVFILE
-```
+=== "Docker"
 
-!!! important
-    Replace `<your-gateway-token>` with the gateway registration token from the console. This token is shown only once, so ensure that you copy it before leaving the page.
+    ### Prerequisites
 
-### Step 3: Start the Gateway
+    - cURL installed
+    - unzip installed
+    - Docker installed and running
+    - Docker Compose installed
 
-```bash
-cd gateway-v0.12.0
-docker compose --env-file configs/keys.env up
-```
+    ### Step 1: Download the Gateway
 
-To run the gateway in detached mode:
+    Run this command in your terminal to download the gateway:
 
-```bash
-docker compose --env-file configs/keys.env up -d
-```
+    ```bash
+    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
+    unzip gateway-v0.12.0.zip
+    ```
 
-### Step 4: Verify the Gateway
+    ### Step 2: Configure the Gateway
 
-```bash
-docker compose ps
-```
+    Run this command to create `gateway-v0.12.0/configs/keys.env` with the required environment variables:
 
-### Stop the Gateway
+    ```bash
+    cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
+    MOESIF_KEY=<your-moesif-key>
+    GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
+    GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
+    ENVFILE
+    ```
 
-```bash
-docker compose down
-```
+    !!! warning "Important"
+        Replace `<your-gateway-token>` with the Gateway Registration Token from the Admin Portal. This token is shown only once, so ensure you copy it before leaving the page.
 
-## Kubernetes setup
+    ### Step 3: Start the Gateway
 
-### Prerequisites
+    1. Navigate to the gateway folder:
 
-- `curl`
-- Kubernetes 1.32 or later
-- Helm 3.18 or later
-- Permission to install `cert-manager`, or an existing `cert-manager` installation
+        ```bash
+        cd gateway-v0.12.0
+        ```
 
-### Install cert-manager
+    2. Run this command to start the gateway using the `configs/keys.env` file created in Step 2:
 
-If `cert-manager` is not already installed, run the following commands:
+        ```bash
+        docker compose --env-file configs/keys.env up
+        ```
 
-```bash
-helm repo add jetstack https://charts.jetstack.io --force-update
-helm repo update
+    To run in detached mode (background):
 
-helm install cert-manager jetstack/cert-manager \
-  --namespace cert-manager \
-  --create-namespace \
-  --set crds.enabled=true
-```
+    ```bash
+    docker compose --env-file configs/keys.env up -d
+    ```
 
-### Install the Gateway chart
+    ### Step 4: Verify the Gateway
 
-Run the following command to install the gateway chart with control plane configurations:
+    Check that the gateway is running:
 
-```bash
-helm install gateway oci://ghcr.io/wso2/api-platform/helm-charts/gateway --version 0.12.0 \
-  --set gateway.controller.controlPlane.host="connect.bijira.dev" \
-  --set gateway.controller.controlPlane.port=443 \
-  --set gateway.controller.controlPlane.token.value="your-gateway-token" \
-  --set gateway.config.analytics.publishers.moesif.application_id="your-moesif-key" \
-  --set gateway.config.analytics.enabled=true
-```
+    ```bash
+    docker compose ps
+    ```
 
-!!! important
-    Replace `your-gateway-token` with the gateway registration token from the console. This token is shown only once, so ensure that you copy it before leaving the page.
+    ### Stopping the Gateway
 
-### Verify the installation
+    To stop the gateway:
 
-```bash
-kubectl get pods
-```
+    ```bash
+    docker compose down
+    ```
 
-### Upgrade the Gateway
+=== "Kubernetes"
 
-```bash
-helm upgrade gateway oci://ghcr.io/wso2/api-platform/helm-charts/gateway --version <new-version> \
-  -f values.yaml
-```
+    ### Prerequisites
 
-### Uninstall the Gateway
+    - cURL installed
+    - Kubernetes 1.32+ cluster
+    - Helm 3.18+ installed
+    - Either permissions to install cert-manager in the cluster or an existing cert-manager installation
 
-```bash
-helm uninstall gateway
-```
+    ### Install cert-manager (optional)
 
-## What's next
+    If cert-manager is not already installed, run these commands before installing the gateway chart:
 
-- [Adding and Managing Policies]({{base_path}}/api-gateway/self-hosted-gateway/adding-and-managing-policies/)
+    ```bash
+    helm repo add jetstack https://charts.jetstack.io --force-update
+    helm repo update
+
+    helm install cert-manager jetstack/cert-manager \
+      --namespace cert-manager \
+      --create-namespace \
+      --set crds.enabled=true
+    ```
+
+    ### Installing the Chart
+
+    Run this command to install the gateway chart with Control Plane configurations:
+
+    ```bash
+    helm install gateway oci://ghcr.io/wso2/api-platform/helm-charts/gateway --version 0.12.0 \
+      --set gateway.controller.controlPlane.host="<your-control-plane-host>" \
+      --set gateway.controller.controlPlane.port=9443 \
+      --set gateway.controller.controlPlane.token.value="your-gateway-token" \
+      --set gateway.config.analytics.publishers.moesif.application_id="your-moesif-key" \
+      --set gateway.config.analytics.enabled=true
+    ```
+
+    !!! warning "Important"
+        Replace `your-gateway-token` with the Gateway Registration Token from the Admin Portal. This token is shown only once, so ensure you copy it before leaving the page.
+
+    ### Verifying the Installation
+
+    Check that the gateway pods are running:
+
+    ```bash
+    kubectl get pods
+    ```
+
+    ### Upgrading the Gateway
+
+    To upgrade to a new version:
+
+    ```bash
+    helm upgrade gateway oci://ghcr.io/wso2/api-platform/helm-charts/gateway --version <new-version> \
+      -f values.yaml
+    ```
+
+    ### Uninstalling the Gateway
+
+    To remove the gateway from your cluster:
+
+    ```bash
+    helm uninstall gateway
+    ```
+
+## What's Next?
+
+- [Adding and Managing Policies]({{base_path}}/api-gateway/universal-gateway/adding-and-managing-policies/)
