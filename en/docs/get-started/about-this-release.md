@@ -71,6 +71,8 @@ For more information on WSO2 API Manager, see the [overview]({{base_path}}/get-s
     
     - Enforce ruleset-attached policies on MCP Servers in either synchronous or asynchronous mode.
 
+    **[Learn more]({{base_path}}/administer/governance/governance-concept)**
+
 ??? note "MCP Analytics"
 
     WSO2 API Manager introduces MCP-aware analytics, enabling deeper visibility into Model Context Protocol (MCP) interactions with structured, protocol-specific insights.
