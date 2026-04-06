@@ -45,12 +45,12 @@ Follow these steps to configure the Intelligent Model Routing policy for your AI
 
 5. Fill in the requested details and click **Save**.
 
-    [![Intelligent Model Routing Policy Configuration]({{base_path}}/assets/img/learn/ai-gateway/intelligent-model-routing-policy-configuration.png){: style="width:40%"}]({{base_path}}/assets/img/learn/ai-gateway/intelligent-model-routing-policy-configuration.png)
+    [![Intelligent Model Routing Policy Configuration]({{base_path}}/assets/img/learn/ai-gateway/intelligent-model-routing-policy-configuration.png){: style="width:90%"}]({{base_path}}/assets/img/learn/ai-gateway/intelligent-model-routing-policy-configuration.png)
 
 !!! note "AWS Bedrock Configuration"
     When configuring intelligent model routing with AWS Bedrock as a multi-model provider service, you must select both the **Provider** (model family) and the **Model** for each rule and the default model. The **Provider** dropdown lists the model families you have set up in the Admin Portal (such as Meta, Anthropic, DeepSeek, etc.), and once a provider is selected, the **Model** dropdown will display the specific models available under that provider.
 
-    [![AWS Bedrock Intelligent Model Routing Policy Configuration]({{base_path}}/assets/img/learn/ai-gateway/aws-bedrock-intelligent-model-routing-policy-configuration.png){: style="width:40%"}]({{base_path}}/assets/img/learn/ai-gateway/aws-bedrock-intelligent-model-routing-policy-configuration.png)
+    [![AWS Bedrock Intelligent Model Routing Policy Configuration]({{base_path}}/assets/img/learn/ai-gateway/aws-bedrock-intelligent-model-routing-policy-configuration.png){: style="width:90%"}]({{base_path}}/assets/img/learn/ai-gateway/aws-bedrock-intelligent-model-routing-policy-configuration.png)
 
 ## Policy Configuration
 
@@ -152,10 +152,3 @@ For each environment (Production/Sandbox), you can configure multiple routing ru
 | Inconsistent routing for the same query | LLM non-determinism | Add a more explicit and detailed context description; ensure rule names are unambiguous |
 | Classification fails entirely | LLM provider not configured or unreachable | Verify the LLM provider is correctly configured for the API and is reachable |
 | Policy not applying | Incorrect content path | Check that the **Content Path** JSONPath expression correctly targets the user message field in your request payload |
-
-## AWS Bedrock Configuration
-
-!!! note "AWS Bedrock Multi-Model Provider"
-    If you are configuring intelligent model routing with AWS Bedrock as a multi-model provider service, you must select both the **Provider** (model family) and the **Model** for each rule and the default model. The **Provider** dropdown lists the model families you have set up in the Admin Portal (such as Meta, Anthropic, DeepSeek, etc.), and once a provider is selected, the **Model** dropdown will display the specific models available under that provider.
-
-    [![AWS Bedrock Intelligent Model Routing Policy Configuration]({{base_path}}/assets/img/learn/ai-gateway/aws-bedrock-intelligent-model-routing-policy-configuration.png){: style="width:40%"}]({{base_path}}/assets/img/learn/ai-gateway/aws-bedrock-intelligent-model-routing-policy-configuration.png)
