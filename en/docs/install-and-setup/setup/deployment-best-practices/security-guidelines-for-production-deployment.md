@@ -139,6 +139,18 @@ Transport Level Security</a>.</p>
 <p>Note that cache prevention headers are enabled for the applications with which the product is shipped by default. Therefore, you need to manually enable cache prevention headers only for all the new applications that you deploy in your server.</p>
 </tr>
 <tr class="odd">
+<td><p>Configure Content Security Policy (CSP) headers</p></td>
+<td><p>WSO2 API Manager application code is developed adhering to security guidelines, and known XSS vulnerabilities within the package have been identified and patched. However, Content Security Policy (CSP) provides an additional layer of protection to mitigate the impact of any unforeseen vulnerabilities such as Cross-Site Scripting (XSS).</p>
+<p>It is recommended to configure the following CSP header at the Load Balancer (LB) level to secure framing behavior:</p>
+<pre><code>Content-Security-Policy: frame-src 'self'; frame-ancestors 'self';</code></pre>
+<p>The above policy ensures the following:</p>
+<ul>
+<li><code>frame-src 'self'</code> - Restricts the sources from which content can be loaded into frames within the application to the same origin only.</li>
+<li><code>frame-ancestors 'self'</code> - Prevents the application from being embedded in frames by external origins, mitigating clickjacking attacks.</li>
+</ul>
+</td>
+</tr>
+<tr class="even">
 <td><p>Increase Ephemeral Diffie-Hellman Key size</p></td>
 <td><p>Before starting the server, open the product startup script (<code>api-manager.sh</code> in Linux and <code>api-manager.bat</code> in Windows) and enter the following with the other Java properties:</p>
 <div class="code panel pdl" style="border-width: 1px;">
