@@ -65,7 +65,7 @@ The following is a list of other WSO2 products and components that have been tes
 </thead>
 <tbody>
 <tr class="even">
-<td>API-M-4.6.0</td>
+<td>API-M 4.6.0</td>
 <td>
 <ul>
 <li>WSO2 IS-6.0.0/WSO2 IS-6.1.0</li>
