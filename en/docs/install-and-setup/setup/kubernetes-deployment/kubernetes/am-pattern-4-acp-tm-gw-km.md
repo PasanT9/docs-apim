@@ -16,28 +16,30 @@ This is the fully distributed deployment for API Manager. The default configurat
     - [Step 2 - Build Docker Images](#step-2-build-docker-images)
     - [Step 3 - Configure Database](#step-3-configure-database)
   - [Minimal Configuration](#minimal-configuration)
+    - [Download and Edit the Values Files](#download-and-edit-the-values-files)
+    - [Deploy API Manager Components](#deploy-api-manager-components)
   - [Configuration](#configuration)
     - [1. General Configuration of Helm Charts](#1-general-configuration-of-helm-charts)
-          - [i. Add Ingress Controller](#i-add-ingress-controller)
-          - [ii. Mount Keystore and Truststore](#ii-mount-keystore-and-truststore)
-          - [iii. Encrypting Secrets](#iii-encrypting-secrets)
-          - [iv. Configure Docker Image and Databases](#iv-configure-docker-image-and-databases)
-          - [v. Configure SSL in Service Exposure](#v-configure-ssl-in-service-exposure)
+          - [1.1 Add Ingress Controller](#11-add-ingress-controller)
+          - [1.2 Mount Keystore and Truststore](#12-mount-keystore-and-truststore)
+          - [1.3 Encrypting Secrets](#13-encrypting-secrets)
+          - [1.4 Configure Docker Image and Databases](#14-configure-docker-image-and-databases)
+          - [1.5 Configure SSL in Service Exposure](#15-configure-ssl-in-service-exposure)
     - [2. API Control Plane Configurations](#2-api-control-plane-configurations)
-          - [i. Configure Multiple Gateways](#i-configure-multiple-gateways)
-          - [ii. Configure User Store Properties](#ii-configure-user-store-properties)
-          - [iii. Configure JWKS URL](#iii-configure-jwks-url)
-          - [iv. Deploy Control Plane](#iv-deploy-control-plane)
+          - [2.1 Configure Multiple Gateways](#21-configure-multiple-gateways)
+          - [2.2 Configure User Store Properties](#22-configure-user-store-properties)
+          - [2.3 Configure JWKS URL](#23-configure-jwks-url)
+          - [2.4 Deploy Control Plane](#24-deploy-control-plane)
     - [3. Traffic Manager Configurations](#3-traffic-manager-configurations)
-          - [i. Configure Key Manager and Eventhub](#i-configure-key-manager-and-eventhub)
-          - [ii. Deploy Traffic Manager](#ii-deploy-traffic-manager)
+          - [3.1 Configure Key Manager and Eventhub](#31-configure-key-manager-and-eventhub)
+          - [3.2 Deploy Traffic Manager](#32-deploy-traffic-manager)
     - [4. Universal Gateway Configuration](#4-universal-gateway-configuration)
-          - [i. Configure Key Manager, Eventhub and Throttling](#i-configure-key-manager-eventhub-and-throttling)
-          - [ii. Enable Replicas](#ii-enable-replicas)
-          - [iii. Deploy Universal Gateway](#iii-deploy-universal-gateway)
+          - [4.1 Configure Key Manager, Eventhub and Throttling](#41-configure-key-manager-eventhub-and-throttling)
+          - [4.2 Enable Replicas](#42-enable-replicas)
+          - [4.3 Deploy Universal Gateway](#43-deploy-universal-gateway)
     - [5. Key Manager Configuration](#5-key-manager-configuration)
-          - [i. Configure Eventhub](#i-configure-eventhub)
-          - [ii. Deploy Key Manager](#ii-deploy-key-manager)
+          - [5.1 Configure Eventhub](#51-configure-eventhub)
+          - [5.2 Deploy Key Manager](#52-deploy-key-manager)
     - [6. Add a DNS Record Mapping the Hostnames and the External IP](#6-add-a-dns-record-mapping-the-hostnames-and-the-external-ip)
     - [7. Access Management Consoles](#7-access-management-consoles)
 
@@ -45,7 +47,7 @@ This is the fully distributed deployment for API Manager. The default configurat
 
 Before you begin, ensure you have the following prerequisites in place:
 
-### Step 1 - Set Up Basic Configurations
+## Step 1 - Set Up Basic Configurations
 
 !!! info
     The following tools and configurations are necessary for deploying WSO2 API-M in a Kubernetes environment.
@@ -64,13 +66,13 @@ Before you begin, ensure you have the following prerequisites in place:
    helm repo add wso2 https://helm.wso2.com && helm repo update
    ```
 
-### Step 2 - Build Docker Images
+## Step 2 - Build Docker Images
 
 - WSO2 product Docker images are used for the Kubernetes deployment.
   
   WSO2 product Docker images available at [DockerHub](https://hub.docker.com/u/wso2/) package General Availability (GA) versions of WSO2 products with no [WSO2 Updates](https://wso2.com/updates).
 
-  For a production-grade deployment of the desired WSO2 product version, it is highly recommended to use the relevant Docker image which packages WSO2 Updates, available at the [WSO2 Private Docker Registry](https://docker.wso2.com/). To use these images, you need an active [WSO2 Subscription](https://wso2.com/subscription).
+  For a production-grade deployment of the desired WSO2 product version, it is highly recommended to use the relevant Docker image which packages WSO2 Updates, available at the [WSO2 Private Docker Registry](https://registry.wso2.com/). To use these images, you need an active [WSO2 Subscription](https://wso2.com/subscription).
 
 - WSO2 API Manager 4.6.0 provides three Docker images:
   - API Control Plane - [wso2am-acp](https://hub.docker.com/r/wso2/wso2am-acp)
@@ -91,7 +93,7 @@ Before you begin, ensure you have the following prerequisites in place:
 
   - Dockerfile for API Control Plane
     ```dockerfile
-    FROM docker.wso2.com/wso2am-acp:4.6.0.0
+    FROM registry.wso2.com/wso2-apim/am-acp:4.6.0.0
 
     ARG USER_HOME=/home/${USER}
     ARG WSO2_SERVER_NAME=wso2am-acp
@@ -105,7 +107,7 @@ Before you begin, ensure you have the following prerequisites in place:
   
   - Dockerfile for Traffic Manager
     ```dockerfile
-    FROM docker.wso2.com/wso2am-tm:4.6.0.0
+    FROM registry.wso2.com/wso2-apim/am-tm:4.6.0.0
 
     ARG USER_HOME=/home/${USER}
     ARG WSO2_SERVER_NAME=wso2am-tm
@@ -119,7 +121,7 @@ Before you begin, ensure you have the following prerequisites in place:
   
   - Dockerfile for Universal Gateway
     ```dockerfile
-    FROM docker.wso2.com/wso2am-universal-gw:4.6.0.0
+    FROM registry.wso2.com/wso2-apim/am-universal-gw:4.6.0.0
 
     ARG USER_HOME=/home/${USER}
     ARG WSO2_SERVER_NAME=wso2am-universal-gw
@@ -140,7 +142,7 @@ Before you begin, ensure you have the following prerequisites in place:
   docker push CONTAINER_REGISTRY/IMAGE_REPO:TAG
   ```
 
-### Step 3 - Configure Database
+## Step 3 - Configure Database
 
 - Before running the API Manager, you must configure the databases and populate them with the initial data. All required database scripts are available in the `dbscripts` directory of the product pack. Locate the appropriate scripts for your chosen database engine and execute them accordingly. It is recommended to use two separate database users with limited permissions for enhanced security.
 
@@ -180,26 +182,40 @@ Before deploying, create a Kubernetes secret with the keystore and truststore:
 kubectl create secret generic apim-keystore-secret --from-file=wso2carbon.jks --from-file=client-truststore.jks
 ```
 
-Deploy API Manager with minimal configuration using the following commands:
+### Download and Edit the Values Files
+
+Before deploying, download the default values files for each component:
+
+```bash
+# Download values files
+curl -o default_acp_values.yaml https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_acp_values.yaml
+curl -o default_km_values.yaml https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_km_values.yaml
+curl -o default_tm_values.yaml https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_tm_values.yaml
+curl -o default_gw_values.yaml https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_gw_values.yaml
+```
+
+Edit the values files as needed for your environment (e.g., database connection, secrets, etc.).
+
+### Deploy API Manager Components
 
 !!! important
     Naming conventions are important. If you want to change them, ensure consistency throughout your configuration.
 
 ```bash
 # 1. Deploy API Control Plane
-helm install apim-acp wso2/wso2am-acp --version 4.6.0-1 -f https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_acp_values.yaml
+helm install apim-acp wso2/wso2am-acp --version 4.6.0-1 -f default_acp_values.yaml
 
 # 2. Deploy Key Manager
-helm install apim-km wso2/wso2am-km --version 4.6.0-1 -f https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_km_values.yaml
+helm install apim-km wso2/wso2am-km --version 4.6.0-1 -f default_km_values.yaml
 
 # 3. Deploy Traffic Manager
-helm install apim-tm wso2/wso2am-tm --version 4.6.0-1 -f https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_tm_values.yaml
+helm install apim-tm wso2/wso2am-tm --version 4.6.0-1 -f default_tm_values.yaml
 
 # 4. Deploy Universal Gateway
-helm install apim-gw wso2/wso2am-universal-gw --version 4.6.0-1 -f https://raw.githubusercontent.com/wso2/helm-apim/4.6.x/docs/am-pattern-4-ACP_TM_GW_KM/default_gw_values.yaml
+helm install apim-gw wso2/wso2am-universal-gw --version 4.6.0-1 -f default_gw_values.yaml
 ```
 
-Once the services are up and running, make sure you have the NGINX Ingress Controller deployed by following the steps outlined in the [Add Ingress Controller](#i-add-ingress-controller) section.
+Once the services are up and running, make sure you have the NGINX Ingress Controller deployed by following the steps outlined in the [Add Ingress Controller](#11-add-ingress-controller) section.
 
 
 ## Configuration
@@ -214,8 +230,7 @@ The Helm charts for the API Manager deployment are available in the [WSO2 Helm C
     <RELEASE_NAME>-<CHART_NAME>-<RESOURCE_NAME>
     ```
 
-
-#### i. Add Ingress Controller
+### 1.1 Add Ingress Controller
 
 The recommendation is to use [**NGINX Ingress Controller**](https://kubernetes.github.io/ingress-nginx/deploy/) suitable for your cloud environment or local deployment. Some sample annotations that could be used with the ingress resources are as follows.
 
@@ -243,7 +258,7 @@ The recommendation is to use [**NGINX Ingress Controller**](https://kubernetes.g
     kubectl create secret tls my-tls-secret --key <private key filename> --cert <certificate filename>
     ```
 
-#### ii. Mount Keystore and Truststore
+### 1.2 Mount Keystore and Truststore
 
 - If you are not including the keystore and truststore in the Docker image, you can mount them using a Kubernetes secret. The following steps show how to mount the keystore and truststore using a Kubernetes secret.
 - Create a Kubernetes secret with the keystore and truststore files. The secret should contain the primary keystore file, secondary keystore file, internal keystore file, and the truststore file. Note that the secret should be created in the same namespace in which you will be setting up the deployment.
@@ -259,7 +274,7 @@ The recommendation is to use [**NGINX Ingress Controller**](https://kubernetes.g
 > For advanced details with regards to managing custom Java keystores and truststores in a container-based WSO2 product deployment
   please refer to the [official WSO2 container guide](https://github.com/wso2/container-guide/blob/master/deploy/Managing_Keystores_And_Truststores.md).
 
-#### iii. Encrypting Secrets
+### 1.3 Encrypting Secrets
 
 - If you need to use cipher tool to encrypt the passwords in the secret, first you need to encrypt the passwords using the cipher tool. The cipher tool can be found in the bin directory of the product pack. The following command can be used to encrypt the password.
   ```
@@ -279,7 +294,7 @@ The recommendation is to use [**NGINX Ingress Controller**](https://kubernetes.g
 
 
 
-#### iv. Configure Docker Image and Databases
+### 1.4 Configure Docker Image and Databases
 
   - Add the following configurations to reflect the docker image created previously in the helm chart.
     
@@ -329,7 +344,7 @@ The recommendation is to use [**NGINX Ingress Controller**](https://kubernetes.g
       adminPassword: ""
     ```
   
-#### v. Configure SSL in Service Exposure
+### 1.5 Configure SSL in Service Exposure
 
 * For WSO2 recommended best practices in configuring SSL when exposing the internal product services to outside of the Kubernetes cluster,
   please refer to the [official WSO2 container guide](https://github.com/wso2/container-guide/blob/master/route/Routing.md#configuring-ssl).
@@ -337,7 +352,7 @@ The recommendation is to use [**NGINX Ingress Controller**](https://kubernetes.g
 
 ### 2. API Control Plane Configurations
 
-#### i. Configure Multiple Gateways
+### 2.1 Configure Multiple Gateways
 
 If you need to distribute the Gateway load that comes in, you can configure multiple API Gateway environments in WSO2 API Manager to publish to a single Developer Portal. [See more...](https://apim.docs.wso2.com/en/latest/manage-apis/deploy-and-publish/deploy-on-gateway/deploy-api/deploy-through-multiple-api-gateways/)
 ```yaml
@@ -371,7 +386,7 @@ If you need to distribute the Gateway load that comes in, you can configure mult
           websubHostname: "websub.wso2.com"
 ```
 
-#### ii. Configure User Store Properties
+### 2.2 Configure User Store Properties
 
 You can configure user store properties as described in this [documentation](https://apim.docs.wso2.com/en/latest/administer/managing-users-and-roles/managing-user-stores/working-with-properties-of-user-stores/):
 
@@ -389,7 +404,7 @@ You can configure user store properties as described in this [documentation](htt
 
 For a complete list of available user store properties and their descriptions, refer to the [documentation](https://apim.docs.wso2.com/en/latest/administer/managing-users-and-roles/managing-user-stores/working-with-properties-of-user-stores/).
 
-#### iii. Configure JWKS URL
+### 2.3 Configure JWKS URL
 By default, for the super tenant, the Resident Key Manager's JWKS URL is set to `https://<HOSTNAME>:9443/oauth2/jwks`. If you are using a virtual host like `am.wso2.com` that is not globally routable, this URL will be incorrect. You can configure the correct JWKS URL for the super tenant using the Helm chart as shown below:
 
 ```yaml
@@ -399,7 +414,7 @@ wso2:
       oauth_config:
         oauth2JWKSUrl: "https://<CONTROL_PLANE_SERVICE_NAME>:9443/oauth2/jwks"
 ```
-#### iv. Deploy Control Plane
+### 2.4 Deploy Control Plane
 
 After configuring all the necessary parameters, you can deploy the Control Plane using Helm:
 
@@ -427,7 +442,7 @@ helm install <release-name> <helm-chart-path> \
 
 ### 3. Traffic Manager Configurations
 
-#### i. Configure Key Manager and Eventhub
+### 3.1 Configure Key Manager and Eventhub
 
 - In this pattern, the Control Plane is used as the Key Manager. Therefore, you need to specify the Control Plane service URL as the Key Manager service URL.
   ```yaml
@@ -446,7 +461,7 @@ helm install <release-name> <helm-chart-path> \
       - "<CONTROL_PLANE_2_SERVICE_NAME>"
   ```
 
-#### ii. Deploy Traffic Manager
+### 3.2 Deploy Traffic Manager
 
 After configuring all the necessary parameters, you can deploy the Traffic Manager using Helm:
 
@@ -467,7 +482,7 @@ helm install <release-name> <helm-chart-path> \
 
 ### 4. Universal Gateway Configuration
 
-#### 4.1 Configure Key Manager, Eventhub and Throttling
+### 4.1 Configure Key Manager, Eventhub and Throttling
 - Configure Control Plane as the Key Manager
   ```yaml
     km:
@@ -505,7 +520,7 @@ helm install <release-name> <helm-chart-path> \
     queryParamBasedThrottling: false
   ```
 
-#### ii. Enable Replicas
+### 4.2 Enable Replicas
 
 To ensure high availability and scalability of the Universal Gateway, you can configure the number of replicas in the `wso2.deployment` section of your `values.yaml` file.
 
@@ -522,7 +537,7 @@ wso2:
     - `minReplicas`: The minimum number of pods that should always be running (e.g., 1).
     - `maxReplicas`: The maximum number of pods that can be scaled up to (e.g., 3).
 
-#### iii. Deploy Universal Gateway
+### 4.3 Deploy Universal Gateway
 
 After configuring all the necessary parameters, you can deploy the Universal Gateway using Helm:
 
@@ -543,7 +558,7 @@ helm install <release-name> <helm-chart-path> \
 
 ### 5. Key Manager Configuration
 
-#### 5.1 Configure Eventhub
+### 5.1 Configure Eventhub
 - Configure eventhub
   ```yaml
   eventhub:
@@ -555,7 +570,7 @@ helm install <release-name> <helm-chart-path> \
       - "<CONTROL_PLANE_2_SERVICE_NAME>"
   ```
 
-#### ii. Deploy Key Manager
+### 5.2 Deploy Key Manager
 
 After configuring all the necessary parameters, you can deploy the Key Manager using Helm:
 
