@@ -19,7 +19,7 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
         - Colima (macOS)
         - Docker Engine + Compose plugin (Linux)
 
-    Ensure `docker` and `docker compose` commands are available:
+    Ensure that Docker and Docker Compose are installed and available:
 
     ```bash
     docker --version
@@ -28,19 +28,19 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
 
     ### Step 1: Download the Gateway
 
-    Run this command in your terminal to download the gateway:
+    Use the download command from the Admin Portal for your gateway, or run the following after replacing `<gateway-version>` with the release tag shown there (for example, `v1.0.0`):
 
     ```bash
-    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
-    unzip gateway-v0.12.0.zip
+    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/<gateway-version>/gateway-<gateway-version>.zip && \
+    unzip gateway-<gateway-version>.zip
     ```
 
     ### Step 2: Configure the Gateway
 
-    Run this command to create `gateway-v0.12.0/configs/keys.env` with the required environment variables:
+    Run this command to create `gateway-<gateway-version>/configs/keys.env` with the required environment variables:
 
     ```bash
-    cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
+    cat > gateway-<gateway-version>/configs/keys.env << 'ENVFILE'
     MOESIF_KEY=<your-moesif-key>
     GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
     GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
@@ -52,7 +52,7 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
     1. Navigate to the gateway folder:
 
         ```bash
-        cd gateway-v0.12.0
+        cd gateway-<gateway-version>
         ```
 
     2. Run this command to start the gateway using the `configs/keys.env` file created in Step 2:
@@ -94,19 +94,19 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
 
     ### Step 1: Download the Gateway
 
-    Run this command in your terminal to download the gateway:
+    Use the download command from the Admin Portal for your gateway, or run the following after replacing `<gateway-version>` with the release tag shown there (for example, `v1.0.0`):
 
     ```bash
-    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
-    unzip gateway-v0.12.0.zip
+    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/<gateway-version>/gateway-<gateway-version>.zip && \
+    unzip gateway-<gateway-version>.zip
     ```
 
     ### Step 2: Configure the Gateway
 
-    Run this command to create `gateway-v0.12.0/configs/keys.env` with the required environment variables:
+    Run this command to create `gateway-<gateway-version>/configs/keys.env` with the required environment variables:
 
     ```bash
-    cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
+    cat > gateway-<gateway-version>/configs/keys.env << 'ENVFILE'
     MOESIF_KEY=<your-moesif-key>
     GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
     GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
@@ -121,7 +121,7 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
     1. Navigate to the gateway folder:
 
         ```bash
-        cd gateway-v0.12.0
+        cd gateway-<gateway-version>
         ```
 
     2. Run this command to start the gateway using the `configs/keys.env` file created in Step 2:
@@ -177,19 +177,19 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
 
     ### Installing the Chart
 
-    Run this command to install the gateway chart with Control Plane configurations:
+    Use the Helm install command shown in the Admin Portal for your gateway where possible so chart and image versions stay in sync. Alternatively, run the following after replacing `<gateway-chart-version>` with the chart version recommended there (for example, `1.0.0`):
 
     ```bash
-    helm install gateway oci://ghcr.io/wso2/api-platform/helm-charts/gateway --version 0.12.0 \
+    helm install gateway oci://ghcr.io/wso2/api-platform/helm-charts/gateway --version <gateway-chart-version> \
       --set gateway.controller.controlPlane.host="<your-control-plane-host>" \
       --set gateway.controller.controlPlane.port=9443 \
-      --set gateway.controller.controlPlane.token.value="your-gateway-token" \
-      --set gateway.config.analytics.publishers.moesif.application_id="your-moesif-key" \
+      --set gateway.controller.controlPlane.token.value="<your-gateway-token>" \
+      --set gateway.config.analytics.publishers.moesif.application_id="<your-moesif-key>" \
       --set gateway.config.analytics.enabled=true
     ```
 
     !!! warning "Important"
-        Replace `your-gateway-token` with the Gateway Registration Token from the Admin Portal. This token is shown only once, so ensure you copy it before leaving the page.
+        Replace `<your-gateway-token>` with the Gateway Registration Token from the Admin Portal. This token is shown only once, so ensure you copy it before leaving the page.
 
     ### Verifying the Installation
 
