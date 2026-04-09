@@ -28,7 +28,7 @@ Before you begin, ensure that you have the following:
 
     - **Display Name**: A unique name for your gateway.
     - **Description**: An optional description.
-    - **URL**: The URL where the gateway will be accessible. For example, `https://localhost:8443`.
+    - **URL**: The URL where the gateway will be accessible (host and port depend on your deployment; for example, `https://<gateway-host>:<gateway-port>`).
     - **Visibility**: Dev Portal visibility based on roles.
 
     ![Gateway Add](../../assets/img/api-gateway/universal-gateway/gateway-add.png)
@@ -46,19 +46,19 @@ Before you begin, ensure that you have the following:
 
 ### Step 1: Download the Gateway
 
-Run the following command to download the gateway:
+Prefer the download command shown in the Admin Portal for your gateway so the release version always matches the connector. Alternatively, replace `<gateway-version>` in the following example with that release tag (for example, `v1.0.0`):
 
 ```bash
-curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/v0.12.0/gateway-v0.12.0.zip && \
-unzip gateway-v0.12.0.zip
+curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/<gateway-version>/gateway-<gateway-version>.zip && \
+unzip gateway-<gateway-version>.zip
 ```
 
 ### Step 2: Configure the Gateway
 
-Run the following command to create the gateway configuration:
+Run the following command to create the gateway configuration (use the same `<gateway-version>` folder name as in Step 1):
 
 ```bash
-cat > gateway-v0.12.0/configs/keys.env << 'ENVFILE'
+cat > gateway-<gateway-version>/configs/keys.env << 'ENVFILE'
 MOESIF_KEY=<your-moesif-key>
 GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
 GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
@@ -72,7 +72,7 @@ When you copy this command from the UI, the placeholder values are populated aut
 Navigate to the gateway directory and start the gateway using Docker Compose:
 
 ```bash
-cd gateway-v0.12.0
+cd gateway-<gateway-version>
 docker compose --env-file configs/keys.env up
 ```
 
@@ -84,8 +84,8 @@ Check that the gateway is running and connected:
 # Check container status
 docker compose ps
 
-# Check gateway health
-curl http://localhost:9002/health
+# Check gateway health (use the host and health endpoint port from your gateway configuration)
+curl http://<gateway-host>:<gateway-health-port>/health
 ```
 
 The gateway should appear as active in the Control Plane.
@@ -146,12 +146,12 @@ If you want to enforce API-key-based authentication, add the **API Key** policy 
     - When an API is deployed to Universal Gateway, gateway policies are managed through [Policy Hub](https://wso2.com/api-platform/policy-hub).
     - For API-key-based authentication, use the [API Key Authentication policy](https://wso2.com/api-platform/policy-hub/policies/api-key-auth).
 
-Use the following cURL commands to verify both behaviors.
+Use the following cURL commands to verify both behaviors. Replace `<gateway-host>` and `<gateway-port>` with the host and port from the gateway **URL** you set in the Admin Portal.
 
 1. Invoke the API **without** an API key.
 
 ```bash
-curl "https://localhost:8443/readinglistapi/1.0/books" -X GET -k
+curl "https://<gateway-host>:<gateway-port>/readinglistapi/1.0/books" -X GET -k
 ```
 
 This request succeeds when the API does not require an API key. If an API key policy is enabled, this request is expected to fail with an authentication error.
@@ -159,7 +159,7 @@ This request succeeds when the API does not require an API key. If an API key po
 2. Invoke the API with the API key header configured in the policy (for example, header name `X-API-Key`).
 
 ```bash
-curl -k -i "https://localhost:8443/readinglistapi/1.0/books" \
+curl -k -i "https://<gateway-host>:<gateway-port>/readinglistapi/1.0/books" \
   -H "X-API-Key: <your-generated-api-key>"
 ```
 
