@@ -1030,7 +1030,7 @@
 }
 
 .mb-config-catalog .mb-config-example:hover .md-clipboard:before {
-    color: rgba(0, 0, 0, .54);
+    color: var(--md-default-fg-color--light);
 }
 
 .mb-config-catalog > section.title > .mb-config-options > h2 {
@@ -1155,7 +1155,7 @@
 }
 
 .mb-config-catalog .mb-config .param-type {
-    color: #b5b5b5;
+    color: var(--md-default-fg-color--light);
 }
 
 @media only screen and (min-width: 100em) {
@@ -1214,7 +1214,7 @@ html .md-typeset .superfences-tabs > label:hover {
     position: relative;
     flex-wrap: wrap;
     margin: 1em 0;
-    border: 0.05rem solid rgba(0, 0, 0, .07);
+    border: 0.05rem solid var(--md-divider-color);
     border-radius: 0.2em;
 }
 
@@ -1232,9 +1232,4 @@ html .md-typeset .superfences-tabs > label:hover {
     order: 99;
     width: 100%;
     background-color: var(--md-default-bg-color);
-}
-
-.mb-config-catalog .superfences-content {
-    flex-direction: column;
-    order: 0;
 }
