@@ -437,7 +437,12 @@ nav:
                 - Application Configuration Constraints: api-security/key-management/third-party-key-managers/configure-km-application-configuration-constraints.md
 
     - API Gateway:
+        - Overview: api-gateway/platform-gateway-capability.md
         - Universal Gateway:
+            - Getting Started: api-gateway/universal-gateway/getting-started.md
+            - Setting Up: api-gateway/universal-gateway/setting-up.md
+            - Adding and Managing Policies: api-gateway/universal-gateway/adding-and-managing-policies.md
+        - Universal Gateway Classic:
             - Overview of the WSO2 Universal Gateway: api-gateway/overview-of-the-api-gateway.md
             - Deploy an API to Gateway: api-gateway/deploy-api-to-gateway.md
             - Response Caching: api-gateway/response-caching.md
