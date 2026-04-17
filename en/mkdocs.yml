@@ -354,8 +354,6 @@ nav:
             - SOAP Client: api-developer-portal/invoke-apis/invoke-apis-using-tools/invoke-an-api-using-a-soap-client.md
             - Postman: api-developer-portal/invoke-apis/invoke-apis-using-tools/try-out-using-postman.md
             - Test APIs with API Chat: api-developer-portal/invoke-apis/invoke-apis-using-tools/test-apis-with-apichat.md
-        - View API Documentation:
-            - View API Documents: api-developer-portal/view-api-documentation/view-api-documentation.md
         - Collaborations:
             - Interact with the Community: api-developer-portal/collaboration/interact-with-the-community.md
         - Generating SDKs:
@@ -971,8 +969,8 @@ extra:
             version: 1.2.0-1
             git_tag: v1.2.0.1
     site_version: 4.7.0
-    base_path: http://localhost:8000/en/4.7.0
-    # base_path: https://apim.docs.wso2.com/en/4.7.0
+    #base_path: http://localhost:8000/en/4.7.0
+    base_path: https://apim.docs.wso2.com/en/4.7.0
     envoy_path: https://www.envoyproxy.io/docs/envoy/v1.24.1
     redoc_theme: '{
         "colors": {
