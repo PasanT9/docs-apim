@@ -354,6 +354,8 @@ nav:
             - SOAP Client: api-developer-portal/invoke-apis/invoke-apis-using-tools/invoke-an-api-using-a-soap-client.md
             - Postman: api-developer-portal/invoke-apis/invoke-apis-using-tools/try-out-using-postman.md
             - Test APIs with API Chat: api-developer-portal/invoke-apis/invoke-apis-using-tools/test-apis-with-apichat.md
+        - View API Documentation:
+            - View API Documents: api-developer-portal/view-api-documentation/view-api-documentation.md
         - Collaborations:
             - Interact with the Community: api-developer-portal/collaboration/interact-with-the-community.md
         - Generating SDKs:
