@@ -1,9 +1,9 @@
 # Setting Up
 
-This guide provides detailed instructions for deploying Universal Gateway in production environments. Choose the infrastructure option that matches your environment.
+This guide provides detailed instructions for deploying API Platform Gateway in production environments. Choose the infrastructure option that matches your environment.
 
 !!! tip "Quick Start"
-    If you are just getting started, see the [Getting Started]({{base_path}}/api-gateway/universal-gateway/getting-started/) guide for a quick setup.
+    If you are just getting started, see the [Getting Started]({{base_path}}/api-gateway/api-platform-gateway/getting-started/) guide for a quick setup.
 
 ## Setup Instructions
 
@@ -31,17 +31,16 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
     Use the download command from the Admin Portal for your gateway, or run the following after replacing `<gateway-version>` with the release tag shown there (for example, `v1.0.0`):
 
     ```bash
-    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/<gateway-version>/gateway-<gateway-version>.zip && \
-    unzip gateway-<gateway-version>.zip
+    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/<gateway-version>/wso2apip-api-gateway-<gateway-version>.zip && \
+    unzip wso2apip-api-gateway-<gateway-version>.zip
     ```
 
     ### Step 2: Configure the Gateway
 
-    Run this command to create `gateway-<gateway-version>/configs/keys.env` with the required environment variables:
+    Run this command to create `wso2apip-api-gateway-<gateway-version>/configs/keys.env` with the required environment variables:
 
     ```bash
-    cat > gateway-<gateway-version>/configs/keys.env << 'ENVFILE'
-    MOESIF_KEY=<your-moesif-key>
+    cat > wso2apip-api-gateway-<gateway-version>/configs/keys.env << 'ENVFILE'
     GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
     GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
     ENVFILE
@@ -52,7 +51,7 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
     1. Navigate to the gateway folder:
 
         ```bash
-        cd gateway-<gateway-version>
+        cd wso2apip-api-gateway-<gateway-version>
         ```
 
     2. Run this command to start the gateway using the `configs/keys.env` file created in Step 2:
@@ -97,17 +96,16 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
     Use the download command from the Admin Portal for your gateway, or run the following after replacing `<gateway-version>` with the release tag shown there (for example, `v1.0.0`):
 
     ```bash
-    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/<gateway-version>/gateway-<gateway-version>.zip && \
-    unzip gateway-<gateway-version>.zip
+    curl -sLO https://github.com/wso2/api-platform/releases/download/gateway/<gateway-version>/wso2apip-api-gateway-<gateway-version>.zip && \
+    unzip wso2apip-api-gateway-<gateway-version>.zip
     ```
 
     ### Step 2: Configure the Gateway
 
-    Run this command to create `gateway-<gateway-version>/configs/keys.env` with the required environment variables:
+    Run this command to create `wso2am-universal-gw-<gateway-version>/configs/keys.env` with the required environment variables:
 
     ```bash
-    cat > gateway-<gateway-version>/configs/keys.env << 'ENVFILE'
-    MOESIF_KEY=<your-moesif-key>
+    cat > wso2apip-api-gateway-<gateway-version>/configs/keys.env << 'ENVFILE'
     GATEWAY_CONTROLPLANE_HOST=<your-control-plane-host>:9443
     GATEWAY_REGISTRATION_TOKEN=<your-gateway-token>
     ENVFILE
@@ -121,7 +119,7 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
     1. Navigate to the gateway folder:
 
         ```bash
-        cd gateway-<gateway-version>
+        cd wso2apip-api-gateway-<gateway-version>
         ```
 
     2. Run this command to start the gateway using the `configs/keys.env` file created in Step 2:
@@ -218,4 +216,4 @@ This guide provides detailed instructions for deploying Universal Gateway in pro
 
 ## What's Next?
 
-- [Adding and Managing Policies]({{base_path}}/api-gateway/universal-gateway/adding-and-managing-policies/)
+- [Adding and Managing Policies]({{base_path}}/api-gateway/api-platform-gateway/adding-and-managing-policies/)
