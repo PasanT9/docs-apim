@@ -96,7 +96,7 @@ in the following formats.
 
 2. Select `IP Addresses`, add the IP addresses in the text input as shown below, and generate the key.
 
-   [![IP Restricted Legacy API key]({{base_path}}/assets/img/learn/ip-api-key.png)]({{base_path}}/assets/img/learn/ip-legacy-api-key.png)
+   [![IP Restricted Legacy API key]({{base_path}}/assets/img/learn/ip-legacy-api-key.png)]({{base_path}}/assets/img/learn/ip-legacy-api-key.png)
 
 #### 2) HTTP referrer restriction
 
@@ -112,4 +112,4 @@ When the HTTP referrer restriction has been enabled, only the specific HTTP refe
 
 2. Select `HTTP Referrers (Web Sites)` and add the referrers in the text input as shown below and generate the key.
 
-   [![HTTP Referer Restricted API key]({{base_path}}/assets/img/learn/http-referer-api-key.png)]({{base_path}}/assets/img/learn/http-referer-legacy-api-key.png)
+   [![HTTP Referer Restricted Legacy API key]({{base_path}}/assets/img/learn/http-referer-legacy-api-key.png)]({{base_path}}/assets/img/learn/http-referer-legacy-api-key.png)
