@@ -4,7 +4,8 @@ This guide walks you through setting up an API Platform Gateway in your environm
 
 ## Overview
 
-The API Platform Gateway is a lightweight, Envoy-based gateway distribution that connects to the WSO2 API Platform Control Plane. It is intended for hybrid API Platform deployments where the gateway runtime stays in your own infrastructure, while API design, deployment, policy configuration, and visibility are handled centrally through the Control Plane.
+The API Platform Gateway is a lightweight gateway distribution intended for hybrid API Platform deployments where the gateway runtime stays in your own infrastructure, while API design, deployment, and visibility are handled centrally through the Control Plane.
+You can also deploy gateway policies to APIs running on API Platform Gateway through Policy Hub.
 
 ## Prerequisites
 
