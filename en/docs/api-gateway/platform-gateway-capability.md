@@ -6,7 +6,7 @@ With this capability, you can seamlessly work with different gateway types witho
 
 Supported gateway types include:
 
-- **API Platform Gateway** – A lightweight, WSO2 gateway distribution that connects a self-hosted runtime to the API Platform Control Plane for centrally managed hybrid deployments.
+- **API Platform Gateway** – A lightweight, WSO2 gateway distribution that connects a self-hosted runtime to the API Manager Control Plane for centrally managed hybrid deployments.
 - **WSO2 Universal Gateway** – The traditional WSO2 API Manager gateway runtime with Synapse-based mediation and gateway capabilities.
 - **Third-Party Gateways** – Integration with supported external gateways, enabling centralized management of APIs deployed across heterogeneous environments.
 
