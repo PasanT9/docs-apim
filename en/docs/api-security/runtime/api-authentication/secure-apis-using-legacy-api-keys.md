@@ -1,29 +1,27 @@
-# Secure APIs with API Keys
+# Secure APIs with Legacy API Keys
 
-From WSO2 API Manager 4.7.0 onwards, you can secure APIs using **API-bound API keys** - opaque tokens that are scoped to a single API. Unlike traditional application-bound keys that can be reused across multiple APIs, an API-bound key is valid only for the specific API it was generated for.
+!!! warning "Deprecated"
+    Legacy API Keys are deprecated from WSO2 API Manager 4.7.0 onwards. It is recommended to use [API-bound API Keys]({{base_path}}/api-security/runtime/api-authentication/secure-apis-using-api-keys/) instead, which provide tighter security by scoping each key to a specific API.
 
-API-bound API keys are generated directly from the Developer Portal without communicating with the Key Manager, making them lightweight and straightforward to issue and manage.
+A Legacy API key is the simplest form of application-based security that you can configure for an API. You can obtain a Legacy API key for a client application from WSO2 API Manager's Developer Portal, via the UI, or via REST APIs. Thereafter, the client application can use the API key to invoke the APIs that are secured with the API key security scheme.
 
-## Key Characteristics of API-bound API Keys
+WSO2 API Manager uses an opaque token as the Legacy API key, and this opaque token is generated via the Developer Portal without communicating with the Key Manager.
 
-- API-specific – The key is linked to one API.
-- Limited scope – It cannot be used to call other APIs.
-- Security control – Reduces misuse because the key works only with the assigned API.
-- Simpler authorization – The gateway validates that the key is mapped to the requested API along with the IP and referred restrictions. Additionally, it does subscription validation for the subscription enabled APIs.
-- Subscriptionless API support – For APIs that do not require a subscription, an API key can be used to invoke the API without a subscription or any application association. Optionally, the key can be associated with an application to gain usage insights and analytics.
-
-When an API is invoked specifying an API key as the authentication method, the APIM Gateway performs the following basic validations.
+When an API is invoked specifying a Legacy API key as the authentication method, the APIM Gateway performs the following two basic validations.
 
 - Subscription validation
 - IP and referrer validation
 
+!!! info
+      API keys, generated within the WSO2 API Manager developer portal without direct key manager communication, cannot be directly forwarded to the backend through the API Gateway for API requests. To grant backends access to user, application specific attributes during API calls, enable backend JWT generation. For detailed instructions on how to enable and utilize backend JWT generation for passing end-user attributes to the backend via the API Gateway, refer to [Passing End-User Attributes to the Backend via API Gateway]({{base_path}}/api-gateway/passing-enduser-attributes-to-the-backend-via-api-gateway/).
+
 ## Validation of API subscriptions
 
-Subscription Validation is a mandatory step in the API key validation process. When an API is invoked using an API key, the WSO2 API Manager checks the API key against the subscription details associated with both the API and the corresponding application. Without successful subscription validation, the API call will be rejected.
+Subscription Validation is a mandatory step in the Legacy API key validation process. When an API is invoked using a Legacy API key, the WSO2 API Manager checks the Legacy API key against the subscription details associated with both the API and the corresponding application. Without successful subscription validation, the API call will be rejected.
 
-## Using API keys to secure an API
+## Using Legacy API key to secure an API
 
-Follow the instructions below to use API key Authentication in WSO2 API Manager.
+Follow the instructions below to use Legacy API key Authentication in WSO2 API Manager.
 
 ### Step 1 - Create and publish an API
 
@@ -31,9 +29,9 @@ Create, publish and deploy an API that is secured with the API key security sche
 
 {!includes/design/create-publish-api.md!}
 
-### Step 2 - Generate the API Key
+### Step 2 - Generate the Legacy API key
 
-{!includes/design/generate-api-key.md!}
+{!includes/design/generate-legacy-api-key.md!}
 
 ### Step 3 - Invoke the API
 
@@ -77,30 +75,30 @@ Invoke the API using the API key. You can use either of the following methods to
 
 ## Additional Information
 
-## API key security restrictions for IP address and HTTP referrer
+### Legacy API key restriction for IP address and HTTP referrer
 
-After issuing an API key for an API or an application, it can be used by anyone to invoke an API subscribed to an associated application. However, if an unauthorized party gets hold of the token, they can create unnecessary invocations to the APIs. To prevent this issue, you can define the authorized parties when generating a token. 
+After issuing a Legacy API key for an application, it can be used by anyone to invoke an API subscribed to the application. However, if an unauthorized party gets hold of the token, they can create unnecessary invocations to the APIs. To prevent this issue, you can define the authorized parties when generating a token. 
 
-WSO2 API Manager allows API keys to be restricted based on two approaches.
+WSO2 API Manager allows Legacy API keys to be restricted based on two approaches.
 
-### 1) IP address restriction
+#### 1) IP address restriction
 
-The IP address restriction allows only the clients with specific IP addresses to use the token. The IP addresses can be specified
+The IP address restriction allows only the clients with specific IP addresses to use the Legacy API key. The IP addresses can be specified
 in the following formats.
 
 - IPv4 (e.g., `192.168.1.2`)
 - IPv6 (e.g., `2002:eb8::2`)
 - IP range in CIDR notation (e.g. `152.12.0.0/13`, `1001:ab8::/14`)
 
-**Generating an API key with an IP restriction**
+**Generating a Legacy API key with an IP restriction**
 
-1. Navigate to API-bound or Application-bound key generation window of the specific API or application in the Developer Portal.
+1. Navigate to Legacy API key generation window of the specific application in the Developer Portal.
 
-2. Select `Preferred IP` option, add the IP addresses in the text input as shown below, and generate the key.
+2. Select `IP Addresses`, add the IP addresses in the text input as shown below, and generate the key.
 
-   [![IP Restricted API key]({{base_path}}/assets/img/learn/api-keys/ip-restrictions.png)]({{base_path}}/assets/img/learn/api-keys/ip-restrictions.png)
+   [![IP Restricted Legacy API key]({{base_path}}/assets/img/learn/ip-api-key.png)]({{base_path}}/assets/img/learn/ip-legacy-api-key.png)
 
-### 2) HTTP referrer restriction
+#### 2) HTTP referrer restriction
 
 When the HTTP referrer restriction has been enabled, only the specific HTTP referrers can use the token. Therefore, by using this restriction, when API clients run on web browsers, you can limit the access to an API through only specific web pages. The referrer can be specified in the following formats.
 
@@ -108,10 +106,10 @@ When the HTTP referrer restriction has been enabled, only the specific HTTP refe
 - Any URL in a single subdomain, using a wildcard asterisk (*): `sub.example.com/*`
 - Any subdomain or path URLs in a single domain, using wildcard asterisks (\*): `*.example.com/*`
 
-**Generating an API key with the HTTP referrer restriction**
+**Generating a Legacy API key with the HTTP referrer restriction**
 
-1. Navigate to API key generation window of that specific API or application in the Developer Portal.
+1. Navigate to Legacy API key generation window of that specific application in the Developer Portal.
 
-2. Select `Preferred Referrer` option and add the referrers in the text input as shown below and generate the key.
+2. Select `HTTP Referrers (Web Sites)` and add the referrers in the text input as shown below and generate the key.
 
-   [![HTTP Referer Restricted API key]({{base_path}}/assets/img/learn/api-keys/referrer-restrictions.png)]({{base_path}}/assets/img/learn/api-keys/referrer-restrictions.png)
+   [![HTTP Referer Restricted API key]({{base_path}}/assets/img/learn/http-referer-api-key.png)]({{base_path}}/assets/img/learn/http-referer-legacy-api-key.png)
