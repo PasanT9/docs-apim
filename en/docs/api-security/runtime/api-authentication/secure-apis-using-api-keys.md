@@ -76,11 +76,11 @@ Invoke the API using the API key. You can use either of the following methods to
 
 You can regenerate API Keys from the **API Keys** section of the API in the Developer Portal. When you regenerate a key, the existing key is immediately revoked and a new opaque token is issued in its place. The existing application association is preserved - you do not need to re-associate the key with the application after regeneration. Update your client application with the new key value to resume API invocations.
 
+   [![Regenerate API Key]({{base_path}}/assets/img/learn/api-keys/regenerate-apikey.png)]({{base_path}}/assets/img/learn/api-keys/regenerate-apikey.png)
+
 ## Revoking an API Key
 
 Once an API key is revoked, it is immediately invalidated and any API calls using that key will be rejected. API keys can be revoked in two ways.
-
-   [![Regenerate API Key]({{base_path}}/assets/img/learn/api-keys/regenerate-apikey.png)]({{base_path}}/assets/img/learn/api-keys/regenerate-apikey.png)
 
 ### Revoking via the Developer Portal
 
