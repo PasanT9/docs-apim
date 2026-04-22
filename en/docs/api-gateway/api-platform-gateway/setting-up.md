@@ -19,7 +19,7 @@ This guide provides detailed instructions for deploying API Platform Gateway in 
         - Colima (macOS)
         - Docker Engine + Compose plugin (Linux)
 
-    Ensure that Docker and Docker Compose are installed and available:
+    Ensure that `Docker` and `Docker Compose` are installed and available:
 
     ```bash
     docker --version

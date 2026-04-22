@@ -25,12 +25,22 @@ Before you begin, ensure that you have the following:
     ![Gateway List Empty](../../assets/img/api-gateway/api-platform-gateway/gateway-list-empty.png)
 
 4. Select **API Platform Gateway** from **Gateway Environment Type**.
+
+    !!! info
+        You can define multiple gateway package versions for API Platform Gateway. In `<API-M_HOME>/repository/conf/deployment.toml`, add or update `[apim.platform_gateway]` and set `versions` to a list of version strings. Restart API Manager for the change to take effect. The configured values are listed in the **Gateway version** drop-down when you add or edit a platform gateway.
+
+        ```toml
+        [apim.platform_gateway]
+        versions = ["1.0.0", "1.1.0"]
+        ```
+
 5. Provide the following details:
 
     - **Display Name**: A unique name for your gateway.
     - **Description**: An optional description.
     - **URL**: The URL where the gateway will be accessible (host and port depend on your deployment; for example, `https://<gateway-host>:<gateway-port>`).
     - **Visibility**: Dev Portal visibility based on roles.
+    - **Gateway version**: Select a version from the list configured on the Control Plane (see the note above).
 
     ![Gateway Add](../../assets/img/api-gateway/api-platform-gateway/gateway-add.png)
 
@@ -134,38 +144,65 @@ To redeploy the API:
    
     ![Deploy API](../../assets/img/api-gateway/api-platform-gateway/deploy-api.png)
 
-## Test the API with cURL
+## Test the API
 
-You can test the API in two ways:
+APIs deployed to **API Platform Gateway** rely on [Policy Hub](https://wso2.com/api-platform/policy-hub) policies for runtime security. Depending on what you attach to the API, the gateway may expect **API key**, **JWT / OAuth-style bearer token**, **HTTP Basic** credentials, or other supported schemes.
 
-1. Without authentication headers (for APIs that are not protected by an API key policy)
-2. With an API key header (for APIs protected by an API key policy)
+In the **Dev Portal**, open the API **Try out** (API Console) view. The **Security** section lists only the auth types that apply to that API (for example **OAuth2** for JWT-style policies, **API Key** for API key policies, **Basic** for basic auth). If the API has no auth policies, the Security section may be hidden.
 
-If you want to enforce API-key-based authentication, add the **API Key** policy to the API and deploy the updated revision.
+If you use an [API Key Authentication](https://wso2.com/api-platform/policy-hub/policies/api-key-auth) policy, the **API key header name** is configured in the policy (it may be a custom header rather than a generic default). Configure it in the Publisher under **Develop** → **Policies** before you deploy.
 
-!!! info
-    - For policy configuration steps, see [Adding and Managing Policies]({{base_path}}/api-gateway/api-platform-gateway/adding-and-managing-policies/).
-    - When an API is deployed to API Platform Gateway, gateway policies are managed through [Policy Hub](https://wso2.com/api-platform/policy-hub).
-    - For API-key-based authentication, use the [API Key Authentication policy](https://wso2.com/api-platform/policy-hub/policies/api-key-auth).
+![API Key policy with a custom API key header name](../../assets/img/api-gateway/api-platform-gateway/api-key-policy-with-custom-header-name.png)
 
-Use the following cURL commands to verify both behaviors. Replace `<gateway-host>` and `<gateway-port>` with the host and port from the gateway **URL** you set in the Admin Portal.
+In **Try out**, choose **API Key**, enter your key, then execute the request or copy **Generate cURL**. The generated command uses the **same header name** as in the policy, so it stays aligned with the gateway.
 
-1. Invoke the API **without** an API key.
+![Generated cURL from Try out including the API key header](../../assets/img/api-gateway/api-platform-gateway/generate-curl-with-apikey.png)
+
+You can also invoke the API with cURL manually. Replace `<gateway-host>` and `<gateway-port>` with the host and port from the gateway **URL** you set in the Admin Portal. Use the header name from your policy (for example replace `X-API-Key` below if your policy defines a custom name).
+
+### cURL examples
+
+1. **No authentication** (no auth policy, or policy not in the request path for this call)
 
 ```bash
 curl "https://<gateway-host>:<gateway-port>/readinglistapi/1.0/books" -X GET -k
 ```
 
-This request succeeds when the API does not require an API key. If an API key policy is enabled, this request is expected to fail with an authentication error.
-
-2. Invoke the API with the API key header configured in the policy (for example, header name `X-API-Key`).
+2. **API key** (use the header name from your policy; the following example uses `X-API-Key`—replace it if your policy defines a custom header as in the screenshots above)
 
 ```bash
 curl -k -i "https://<gateway-host>:<gateway-port>/readinglistapi/1.0/books" \
-  -H "X-API-Key: <your-generated-api-key>"
+  -H "X-API-Key: <your-api-key>"
 ```
 
-If the API key is valid, the request succeeds and returns a successful response from the backend. Ensure the header name in your cURL command exactly matches the header name configured in the API Key policy.
+3. **Bearer token** (when a JWT or OAuth-style policy applies; example uses `Authorization`)
+
+```bash
+curl -k -i "https://<gateway-host>:<gateway-port>/readinglistapi/1.0/books" \
+  -H "Authorization: Bearer <your-access-token>"
+```
+
+4. **HTTP Basic** (when a basic auth policy applies)
+
+The Dev Portal encodes your credentials and sets `Authorization: Basic` followed by the Base64 string (same as the generated cURL from **Try out**). Use that header when copying from the console; `<base64-credentials>` is the Base64 encoding of `username:password`.
+
+```bash
+curl -k -i "https://<gateway-host>:<gateway-port>/readinglistapi/1.0/books" \
+  -H "Authorization: Basic <base64-credentials>"
+```
+
+Equivalently, cURL can build the same header with `-u`:
+
+```bash
+curl -k -i "https://<gateway-host>:<gateway-port>/readinglistapi/1.0/books" \
+  -u "<username>:<password>"
+```
+
+If authentication fails, confirm the policy is deployed, the header names match the policy and API configuration, and you have redeployed the API after policy changes.
+
+!!! info
+    - For policy configuration steps, see [Adding and Managing Policies]({{base_path}}/api-gateway/api-platform-gateway/adding-and-managing-policies/).
+    - Gateway policies for this deployment model are sourced from [Policy Hub](https://wso2.com/api-platform/policy-hub). Choose the policy that matches your security model (for example [API Key Authentication](https://wso2.com/api-platform/policy-hub/policies/api-key-auth) or other JWT, OAuth, or Basic policies listed there).
 
 ## Next steps
 
